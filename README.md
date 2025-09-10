@@ -1,3 +1,5 @@
+![](/repo_img//project_logo_rmv_background)
+
 # Usina de Projetos Experimentais 4 - Grupo ODSCoders
 
 Neste repositório você encontrará o projeto do 4º semestre da disciplina de UPX - 4 (Usina de Projetos Experimentais 4) do grupo **ODSCoders** da turma A de Análise e Desenvolvimento de Sistemas EAD do Centro Universitário Facens.
