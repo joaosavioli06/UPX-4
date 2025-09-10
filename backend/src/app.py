@@ -1,0 +1,1 @@
+# Arquivo principal onde o Flask será inicializado. Ele importará as rotas e os modelos para que tudo funcione junto.

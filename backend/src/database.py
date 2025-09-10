@@ -1,0 +1,1 @@
+# Este arquivo cuidará da lógica de conexão com o banco de dados
