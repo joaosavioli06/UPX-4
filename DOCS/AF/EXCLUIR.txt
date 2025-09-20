@@ -1,0 +1,1 @@
+Excluir arquivo após inserir os arquivos verdadeiros na pasta!
