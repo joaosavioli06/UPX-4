@@ -3,3 +3,6 @@
 services:
 - id: backend
   root_directory: backend
+
+  secrets:
+  - FIREBASE_ADMIN_KEY
