@@ -1,19 +1,30 @@
 # apphosting.yaml
 
-services:
-- id: backend
-  root_directory: backend
-  
-build_config:
-  # Usa a imagem oficial de Python do Google Cloud
-  buildpacks:
-    - python
-  
-  # Comando de build que irá instalar as dependências
-  command: |
-    cd backend
-    pip install -r requirements.txt
+# Força o Firebase a usar o buildpack de Python 3.10
+# (ou a versão que você usou no seu runtime.txt)
+builds:
+  - id: python-builder
+    name: gcr.io/buildpacks/python/builder:v1.0.0
     
-# Referência ao segredo que você já configurou
+# Define o serviço de backend
+services:
+  - id: backend
+    root_directory: backend
+    
+    # Esta linha informa ao Firebase para usar o builder que você definiu acima
+    builder: python-builder
+    
+# As rotas para a sua aplicação
+routes:
+  - source: /
+    destination: backend
+  - source: /<path:rest>
+    destination: backend
+    
+# As variáveis de ambiente
+env_variables:
+  FLASK_APP: src/app.py
+  
+# Os segredos
 secrets:
   - FIREBASE_ADMIN_KEY
