@@ -1,0 +1,5 @@
+# apphosting.yaml
+
+services:
+- id: backend
+  root_directory: backend
