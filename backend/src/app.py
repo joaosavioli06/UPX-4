@@ -1,5 +1,13 @@
 # Arquivo principal onde o Flask será inicializado. Ele importará as rotas e os
+import firebase_admin
+from firebase_admin import credentials, firestore
 from flask import Flask, jsonify
+
+# O caminho para o seu arquivo JSON da chave privada
+# Renomeie para o nome do seu arquivo, ex: 'ecotrek-firebase-key.json'
+cred = credentials.Certificate('caminho/para/seu/arquivo.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 # 1. Cria a sua aplicação Flask
 app = Flask(__name__)
