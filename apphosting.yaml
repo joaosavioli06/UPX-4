@@ -3,6 +3,17 @@
 services:
 - id: backend
   root_directory: backend
-
-  secrets:
+  
+build_config:
+  # Usa a imagem oficial de Python do Google Cloud
+  buildpacks:
+    - python
+  
+  # Comando de build que irá instalar as dependências
+  command: |
+    cd backend
+    pip install -r requirements.txt
+    
+# Referência ao segredo que você já configurou
+secrets:
   - FIREBASE_ADMIN_KEY
