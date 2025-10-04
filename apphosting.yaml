@@ -23,7 +23,7 @@ routes:
     
 # As variáveis de ambiente
 env_variables:
-  FLASK_APP: src/app.py
+  FLASK_APP: backend/src/app.py
   
 # Os segredos
 secrets:
