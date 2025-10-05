@@ -1,0 +1,381 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.cabecalho {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #F5F7FA;
+    height: 84px;
+}
+
+.cadeirante_icone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* margin-top: 26px;
+    width: 37px;
+    height: auto; */
+}
+
+.cadeirante_icone img {
+    width: 35px;
+    height: auto;
+}
+
+.titulo {
+    display: flex;
+    color: #015E20;
+    font-family: "Rambla-Bold", sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.navegacao {
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+
+.navegacao a {
+    color: #18191F;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+}
+
+.navegacao a:hover {
+    color: #058530;
+}
+
+.acoes {
+    display: flex;
+    list-style: none;
+    gap: 34px;
+    align-items: center;
+}
+
+.acoes a {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.botao_login {
+    color: #015E20;
+    background-color: #F5F7FA;
+    padding: 20px 10px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    width: 77px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao_login:hover {
+    background-color: #fafafa;
+    color: #00822B;
+}
+
+.botao_cadastro {
+    color: #FFFFFF;
+    background-color: #015E20;
+    padding: 20px 10px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    width: 125px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao_cadastro:hover {
+    background-color: #00822B;
+}
+
+.conteudo_principal {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    /* padding: 96px 144px; */
+    background-color: #F5F7FA;
+}
+
+.home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-family: "Inter", sans-serif;
+    /* gap: 104px; */
+}
+
+.frase {
+    display: inline-block;
+    padding: 96px 144px;
+}
+
+.frase_principal {
+    display: inline-block;
+    font-size: 64px;
+    color: #4D4D4D;
+    line-height: 1.1;
+}
+
+.frase_principal span {
+    color: #015E20;
+}
+
+.paragrafo {
+    font-size: 16px;
+    color: #717171;
+    margin-top: 16px;
+}
+
+.botao_registro {
+    color: #FFFFFF;
+    background-color: #015E20;
+    padding: 20px 10px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    width: 128px;
+    height: 52px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+}
+
+.botao_registro:hover {
+    background-color: #00822B;
+}
+
+.imagem_cidade {
+    width: 600px;
+    height: auto;
+    object-fit: contain;
+}
+
+.exemplos-1 {
+    /* display: flex;   */
+    padding-top: 42px;
+    /* justify-content: center; */
+    background-color: #FFFFFF;
+}
+
+.funcionalidade {
+    font-family: "Inter", sans-serif;
+    font-size: 36;
+    font-weight: 600;
+    color: #4D4D4D;
+    /* text-align: center; */
+}
+
+.subtitulo {
+    display: flex;
+    justify-content: center;
+}
+
+.demonstracao {
+    display: inline-flex;
+    align-items: center;
+}
+
+.imagem_cadastro {
+    display: inline-flex;
+    /* margin-top: 53px;    */
+    padding: 53px 80px;
+}
+
+.topicos_cadastro {
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #717171;
+    margin-top: 16px;
+    margin-left: 25px;
+}
+
+.visibilidade {
+    background-color: #F5F7FA;
+    font-family: "Inter", sans-serif;
+    /* text-align: center; */
+}
+
+.acessivel {
+    /* background-color: #00822B; */
+    display: inline-block;
+    padding: 96px 144px;
+}
+
+.acessivel h2 {
+    font-size: 32px;
+}
+
+.acessivel span {
+    color: #4CAF4F;
+}
+
+.acessivel p {
+    font-size: 16px;
+    color: #18191F;
+    margin-top: 8px;
+}
+
+.icones {
+    display: inline-block;
+    align-items: center;
+}
+
+.icone-item img,
+p {
+    display: inline-block;
+    align-items: center;
+    color: #717171;
+}
+
+.icone_pessoa {
+    gap: 16px;
+}
+
+.numero {
+    font-size: 28px;
+    font-weight: 700;
+    color: #4D4D4D;
+}
+
+.exemplos-2 {
+    background-color: #FFFFFF;
+    padding-top: 48px;
+}
+
+.exploracao {
+    font-family: "Inter", sans-serif;
+    font-size: 36;
+    font-weight: 600;
+    color: #4D4D4D;
+    display: inline-flex;
+    align-items: center;
+}
+
+.imagem_exploracao {
+    display: inline-flex;
+    padding: 53px 80px;
+}
+
+.exploracao_mapa {
+    margin-left: 40px;
+}
+
+.topicos_exploracao {
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #717171;
+    margin: 16px 60px;
+}
+
+.exemplos-3 {
+    background-color: #F5F7FA;
+    padding-top: 48px;
+}
+
+.solicitacao {
+    font-family: "Inter", sans-serif;
+    font-size: 36;
+    font-weight: 600;
+    color: #4D4D4D;
+    display: inline-flex;
+    align-items: center;
+}
+
+.imagem_solicitacao {
+    display: inline-flex;
+    padding: 53px 80px;
+}
+
+.solicitacao_reclamacao {
+    margin-left: 30px;
+}
+
+.topicos_solicitacao {
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #717171;
+    margin: 16px 50px;
+}
+
+div h3 {
+    color: #717171;
+    font-size: 14px;
+    margin-left: 30px;
+}
+
+.mudanca {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.frase_mudanca {
+    font-family: "Inter", sans-serif;
+    font-size: 64px;
+    font-weight: 600;
+    color: #263238;
+    text-align: center;
+    margin-top: 52px;
+}
+
+.botao_mudanca {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    background-color: #015E20;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    width: 244px;
+    height: 52px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    margin-top: 32px;
+}
+
+.botao_mudanca:hover {
+    background-color: #00822B;
+}
+
+.rodape {
+    background-color: #263238;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 165px;
+    margin-top: 32px;
+}
+
+.titulo_rodape {
+    display: flex;
+    color: #FFFFFF;
+    font-family: "Rambla-Bold", sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.copyright {
+    font-family: "Inter", sans-serif;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 14px;
+}

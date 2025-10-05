@@ -1,0 +1,17 @@
+@font-face {
+    font-family: Rambla-Bold;
+    src: url(/frontend/src/fonts/Rambla-Bold.ttf) format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Rambla-Regular;
+    src: url(/frontend/src/fonts/Rambla-Regular.ttf) format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url(/frontend/src/fonts/Inter-VariableFont_opsz\,wght.ttf) format('truetype');
+    font-weight: 100 900;
+}
