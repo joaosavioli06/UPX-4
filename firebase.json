@@ -1,0 +1,13 @@
+{
+  "apphosting": {
+    "backendId": "ecotrek",
+    "rootDir": "backend/",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      "functions"
+    ]
+  }
+}
