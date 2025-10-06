@@ -1,21 +1,29 @@
 {
   "apphosting": {
-    "backendId": "ecotrek",
-    "rootDir": "backend/",
-    "services": [
-      {
-      "name": "ecotrek-backend",
-      "rootDirectory": "backend"
-      }
-    ],
-
+    "backendId": "ecotrek-backend",
+    "rootDir": "/",
     "ignore": [
       "node_modules",
       ".git",
       "firebase-debug.log",
       "firebase-debug.*.log",
       "functions"
-    ],
-    "alwaysDeployFromSource": true
-  }
+    ]
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
+    }
+  ]
 }

@@ -1,6 +1,5 @@
 const admin = require('firebase-admin');
 
-// O nome do segredo no Google Cloud Secret Manager
 const serviceAccount = process.env.FIREBASE_ADMIN_KEY;
 
 if (!serviceAccount) {
