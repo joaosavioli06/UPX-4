@@ -7,7 +7,7 @@
 
 .cabecalho {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
     background-color: #F5F7FA;
@@ -18,9 +18,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    /* margin-top: 26px;
-    width: 37px;
-    height: auto; */
 }
 
 .cadeirante_icone img {
@@ -101,10 +98,6 @@
 }
 
 .conteudo_principal {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    /* padding: 96px 144px; */
     background-color: #F5F7FA;
 }
 
@@ -112,19 +105,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     font-family: "Inter", sans-serif;
-    /* gap: 104px; */
+    padding-left: 120px;
+    padding-right: 0;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
 
 .frase {
-    display: inline-block;
-    padding: 96px 144px;
+    max-width: 580px;
 }
 
 .frase_principal {
-    display: inline-block;
     font-size: 64px;
+    font-weight: 600;
     color: #4D4D4D;
     line-height: 1.1;
 }
@@ -137,6 +131,7 @@
     font-size: 16px;
     color: #717171;
     margin-top: 16px;
+    line-height: 1.5;
 }
 
 .botao_registro {
@@ -158,15 +153,16 @@
 }
 
 .imagem_cidade {
-    width: 600px;
+    width: 650px;
     height: auto;
-    object-fit: contain;
+    margin-right: 0;
+    object-fit: cover;
+    align-self: flex-end;
+    align-self: center;
 }
 
 .exemplos-1 {
-    /* display: flex;   */
     padding-top: 42px;
-    /* justify-content: center; */
     background-color: #FFFFFF;
 }
 
@@ -175,7 +171,6 @@
     font-size: 36;
     font-weight: 600;
     color: #4D4D4D;
-    /* text-align: center; */
 }
 
 .subtitulo {
@@ -190,7 +185,6 @@
 
 .imagem_cadastro {
     display: inline-flex;
-    /* margin-top: 53px;    */
     padding: 53px 80px;
 }
 
@@ -206,17 +200,15 @@
 .visibilidade {
     background-color: #F5F7FA;
     font-family: "Inter", sans-serif;
-    /* text-align: center; */
-}
-
-.acessivel {
-    /* background-color: #00822B; */
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 96px 144px;
 }
 
 .acessivel h2 {
     font-size: 32px;
+    color: #18191F;
 }
 
 .acessivel span {
@@ -230,23 +222,25 @@
 }
 
 .icones {
-    display: inline-block;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-.icone-item img,
-p {
-    display: inline-block;
+.icone-item {
+    display: flex;
     align-items: center;
+    gap: 12px;
+}
+
+
+.icone-item p {
     color: #717171;
-}
-
-.icone_pessoa {
-    gap: 16px;
+    font-size: 14px;
 }
 
 .numero {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     color: #4D4D4D;
 }
