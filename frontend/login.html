@@ -7,54 +7,65 @@
     <meta name="description" content="EcoTrek - Juntos por uma cidade mais acessível.">
     <title>EcoTrek</title>
 
+    <link rel="icon" href="src/img/Icone-aba.png">
     <link rel="stylesheet" href="src/css/fonts.css">
     <link rel="stylesheet" href="src/css/styles.css">
 </head>
 
 <body>
-    <header class="cabecalho">
-        <a href="/" class="cadeirante_icone">
-            <img src="./src/img/Cadeirante-icone.png" alt="Icone de cadeirante">
-            <h2 class="titulo">EcoTrek</h2>
-        </a>
+    <main class="container_principal">
+        <section class="bem-vindo">
+            <div class="apresentacao">
+                <div class="logo_container">
+                    <img class="logo_ecotrek" src="./src/img/Logo-Ecotrek.png" alt="Logo do projeto EcoTrek">
+                </div>
 
-        <nav>
-            <ul class="navegacao">
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./index.html">Como funciona</a></li>
-                <li><a href="./mapa.html">Mapa</a></li>
-                <li><a href="./recompensa.html">Recompensa</a></li>
-                <li><a href="./faq.html">FAQ</a></li>
-            </ul>
-        </nav>
+                <h1>Bem-vindo ao EcoTrek</h1>
+                <p>Onde inovação e acessibilidade andam juntas</p>
+            </div>
+        </section>
 
-        <div class="acoes">
-            <a href="./login.html" class="botao_login">Login</a>
-            <a href="./registro.html" class="botao_cadastro">Cadastre-se</a>
-        </div>
-    </header>
+        <section class="acessar">
+            <div>
+                <h1>Acessar conta</h1>
 
-    <main>
+                <form action="#" method="post" class="caixa_cadastro">
+                    <label class="texto_login" for="email">Login</label>
+                    <input class="form_login" type="email" placeholder="E-mail" name="email" id="email">
 
+                    <label class="texto_login" for="senha">Senha</label>
+                    <input class="form_login" type="password" placeholder="Inserir senha" name="senha" id="senha">
+
+                    <div class="guardar_senha">
+                        <label class="switch">
+                            <input type="checkbox" id="lembrar">
+                            <span class="slider"></span>
+                        </label>
+
+                        <label for="lembrar" class="texto_lembrar">Lembrar</label>
+
+                        <a href="#" class="esqueceu_senha">Esqueceu a senha?</a>
+                    </div>
+
+                    <div class="botoes">
+                        <button type="submit" class="botao_logar">Login</button>
+
+                        <div id="linha_horizontal"></div>
+
+                        <a href="#" class="registro_google">
+                            <img src="./src/img/Icone-google.png" alt="Icone do Google">
+                            Se cadastar com Google
+                        </a>
+                    </div>
+
+                    <div class="crie_conta">
+                        <p>Não tem conta?</p>
+                        <a href="./registro.html">Cadastrar</a>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
-
-    <footer class="rodape">
-        <a href="/" class="cadeirante_icone">
-            <img src="./src/img/Cadeirante-icone-branco.png" alt="Icone de cadeirante">
-            <h2 class="titulo_rodape">EcoTrek</h2>
-        </a>
-
-        <div>
-            <p class="copyright">Copyright © 2025 EcoTreck Ltd. Todos os direitos reservados.</p>
-        </div>
-
-        <div class="redes-sociais">
-            <img class="instagram" src="./src/img/Icone-instagram.png" alt="Icone do instagram">
-            <img class="pesquisa" src="./src/img/Icone-pesquisa.png" alt="Icone de pesquisa">
-            <img class="twitter" src="./src/img/Icone-twitter.png" alt="Icone do twitter">
-            <img class="youtube" src="./src/img/Icone-youtube.png" alt="Icone do youtube">
-        </div>
-    </footer>
 </body>
 
 </html>

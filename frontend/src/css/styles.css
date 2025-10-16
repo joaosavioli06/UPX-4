@@ -5,6 +5,8 @@
     text-decoration: none;
 }
 
+/* Index */
+
 .cabecalho {
     display: flex;
     justify-content: space-between;
@@ -372,4 +374,327 @@ div h3 {
     color: #FFFFFF;
     font-weight: 400;
     font-size: 14px;
+}
+
+/* Registro */
+
+.container_principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    /* padding: 0 50px; */
+    font-family: "Inter", sans-serif;
+}
+
+.bem-vindo {
+    background-color: #015E20;
+    width: 984px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo_container {
+    width: 350px;
+    height: 330px;
+    background-color: #E8FFD7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo_ecotrek {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.apresentacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.apresentacao h1 {
+    font-size: 48px;
+    font-weight: 600;
+    margin-top: 42px;
+}
+
+.apresentacao p {
+    font-size: 24px;
+    font-weight: 200;
+    margin-top: 16px;
+}
+
+.cadastre-se {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 100px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.cadastre-se h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.caixa_cadastro {
+    display: flex;
+    flex-direction: column;
+}
+
+.texto_cadastro {
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 16px;
+    margin-left: 16px;
+}
+
+.form_cadastro {
+    background-color: #E5E5E5;
+    margin-top: 16px;
+    width: 360px;
+    height: 48px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+.form_cadastro::placeholder {
+    font-size: 15px;
+    padding: 16px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.checkbox input {
+    width: 16px;
+    height: 16px;
+}
+
+.termo_checkbox {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0;
+    margin-left: 8px;
+}
+
+.termo_checkbox a {
+    color: #007AFF;
+    text-decoration: none;
+}
+
+.termo_checkbox a:hover {
+    text-decoration: underline;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: column;
+}
+
+#linha_horizontal {
+    width: 360px;
+    height: 1px;
+    background-color: #E0E0E0;
+    border: none;
+    margin-top: 32px;
+    opacity: 0.8;
+}
+
+.botao_criar {
+    background-color: #015E20;
+    color: #FFFFFF;
+    margin-top: 32px;
+    width: 360px;
+    height: 40px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    transition: background 0.3s ease;
+}
+
+.botao_criar:hover {
+    background-color: #00822B;
+    cursor: pointer;
+}
+
+.registro_google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #333333;
+    margin-top: 32px;
+    width: 360px;
+    height: 40px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.registro_google img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Login */
+
+.acessar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 100px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.form_login {
+    background-color: #E5E5E5;
+    margin-top: 16px;
+    width: 360px;
+    height: 48px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+.form_login::placeholder {
+    font-size: 15px;
+    padding: 16px;
+}
+
+.texto_login {
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 16px;
+    margin-left: 16px;
+}
+
+.botao_logar {
+    background-color: #015E20;
+    color: #FFFFFF;
+    margin-top: 32px;
+    width: 360px;
+    height: 40px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    transition: background 0.3s ease;
+}
+
+.botao_logar:hover {
+    background-color: #00822B;
+    cursor: pointer;
+}
+
+.guardar_senha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.guardar_senha label:first-child {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.guardar_senha input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch {
+    margin: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #F2F2F2;
+    border: 0.5px solid #E5E5E5;
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 1px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #00822B; /* verde EcoTrek */
+}
+
+input:checked + .slider::before {
+    transform: translateX(18px);
+}   
+
+.texto_lembrar {
+    margin-right: 140px;
+    font-size: 12px;
+    color: #1A1A1A;
+    cursor: pointer;
+}
+
+.esqueceu_senha {
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #007AFF;
+    text-decoration: none;
+}
+
+.esqueceu_senha:hover {
+    text-decoration: underline;
+}
+
+.crie_conta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    font-size: 13px;
+}
+
+.crie_conta a {
+    color: #007AFF;
+    text-decoration: none;
 }
