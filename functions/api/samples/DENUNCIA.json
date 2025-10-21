@@ -1,0 +1,10 @@
+{
+  "categoria": "iluminação",
+  "descricao": "Lâmpada do poste queimada na Rua Principal.",
+  "imagemUrl": "",
+  "localizacao": {
+    "latitude": -23.567890,
+    "longitude": -46.789012
+  },
+  "usuario": "/usuarios/ID_DO_USUARIO_EXISTENTE" 
+}
