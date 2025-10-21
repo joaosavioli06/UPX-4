@@ -3,22 +3,30 @@ const { db } = require("../config/firebase");
 // Criar usuário
 exports.createUser = async (req, res) => {
     try {
-        // Pega apenas os dados de identificação do corpo (nome e email)
+        // Pega apenas os campos que o cliente deve fornecer (nome e email)
         const { nome, email } = req.body; 
+        
+        // Pega o ID do usuário do token (o UID do Firebase Auth)
+        const userId = req.userId;
 
-        // Cria o objeto do novo usuário, definindo os valores padrão no servidor
+        if (!userId) {
+             return res.status(401).json({ error: "UID de usuário não encontrado." });
+        }
+
+        // Cria o objeto, definindo valores padrão e garantindo o email no documento
         const novoUsuario = {
             nome,
             email,
-            nivel: 0,   // O servidor define o valor inicial
+            nivel: 1,   // O servidor define o valor inicial
             pontos: 0   // O servidor define o valor inicial
         };
 
-        const docRef = await db.collection("usuarios").add(novoUsuario);
+        // Usa o UID do Auth como ID do documento para ter uma referência forte
+        const docRef = await db.collection("usuarios").doc(userId).set(novoUsuario);
         
         res.status(200).json({ 
-            id: docRef.id, 
-            message: "Usuário criado!" 
+            id: userId, // Retorna o UID
+            message: "Usuário criado/atualizado!" 
         });
 
     } catch (error) {
