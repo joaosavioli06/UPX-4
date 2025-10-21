@@ -1,4 +1,4 @@
-![](/repo_img//project_logo_rmv_background.png)
+![](/frontend/src/img/project_logo_rmv_background.png/)
 
 # Usina de Projetos Experimentais 4 - Grupo ODSCoders
 
