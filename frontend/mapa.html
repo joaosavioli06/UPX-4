@@ -10,6 +10,9 @@
     <link rel="icon" href="src/img/Icone-aba.png">
     <link rel="stylesheet" href="src/css/fonts.css">
     <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 </head>
 
 <body>
@@ -36,10 +39,64 @@
     </header>
 
     <main>
+        <div class="registrar">
+            <h1>Registrar reclamação</h1>
+            <p>Clique no mapa ou preencha os campos abaixo para registrar sua reclamação</p>
+        </div>
 
+        <div class="form_mapa">
+            <div id="map"></div>
+
+            <div>
+                <form action="#" method="post" class="caixa_registro">
+                    <label class="escolha_registro" for="reclamacao">Tipo de reclamação</label>
+                    <select class="form_registro" name="reclamacao" id="reclamacao" required>
+                        <option value="" disabled selected hidden>Selecionar reclamação</option>
+                        <option value="buracos">Buracos na rua</option>
+                        <option value="transporte">Transporte público</option>
+                        <option value="acessibilidade">Falta de acessibilidade</option>
+                        <option value="iluminacao">Iluminação pública</option>
+                        <option value="areas">Áreas verdes</option>
+                        <option value="lixo">Lixo acumulado</option>
+                    </select>
+
+                    <label class="texto_registro" for="endereco">Endereço</label>
+                    <input class="form_registro" type="text" id="endereco" name="endereco"
+                        placeholder="Inserir endereço" required>
+
+                    <label class="texto_registro" for="cep">CEP</label>
+                    <input class="form_registro" type="text" id="cep" name="cep" pattern="\d{5}-?\d{3}"
+                        placeholder="Inserir cep" required>
+
+                    <label class="texto_registro" for="referencia">Ponto de referência</label>
+                    <input class="form_registro" type="text" id="referencia" name="referencia"
+                        placeholder="Inserir referência">
+
+                    <label class="texto_registro" for="ocorrido">Informe o que aconteceu</label>
+                    <textarea class="form_registro" id="ocorrido" name="ocorrido" rows="4"
+                        placeholder="Descreva em detalhes" required></textarea>
+
+                    <button type="submit" class="botao_enviar">Registrar reclamação</button>
+                    <p>Você ganhará 20 pontos pela sua contribuição</p>
+                </form>
+            </div>
+
+            <script>
+                var map = L.map('map').setView([-23.5015, -47.4526], 13);
+
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+                L.marker([-23.5015, -47.4526]).addTo(map)
+                    .bindPopup("Sorocaba - SP")
+                    .openPopup();
+            </script>
+        </div>
     </main>
 
-    <footer class="rodape">
+    <!-- <footer class="rodape">
         <a href="/" class="cadeirante_icone">
             <img src="./src/img/Cadeirante-icone-branco.png" alt="Icone de cadeirante">
             <h2 class="titulo_rodape">EcoTrek</h2>
@@ -55,7 +112,7 @@
             <img class="twitter" src="./src/img/Icone-twitter.png" alt="Icone do twitter">
             <img class="youtube" src="./src/img/Icone-youtube.png" alt="Icone do youtube">
         </div>
-    </footer>
+    </footer> -->
 </body>
 
 </html>

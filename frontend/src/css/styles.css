@@ -473,7 +473,7 @@ div h3 {
 
 .form_cadastro::placeholder {
     font-size: 15px;
-    padding: 16px;
+    padding: 14px;
 }
 
 .checkbox {
@@ -658,13 +658,14 @@ div h3 {
     transition: 0.4s;
 }
 
-input:checked + .slider {
-    background-color: #00822B; /* verde EcoTrek */
+input:checked+.slider {
+    background-color: #00822B;
+    /* verde EcoTrek */
 }
 
-input:checked + .slider::before {
+input:checked+.slider::before {
     transform: translateX(18px);
-}   
+}
 
 .texto_lembrar {
     margin-right: 140px;
@@ -697,4 +698,104 @@ input:checked + .slider::before {
 .crie_conta a {
     color: #007AFF;
     text-decoration: none;
+}
+
+/* Mapa */
+
+.form_mapa {
+    display: flex;
+    margin-top: 41px;
+    gap: 40px;
+    padding-left: 100px;
+}
+
+#map {
+    width: 865px;
+    height: 550px;
+    border-radius: 8px;
+}
+
+.registrar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #4D4D4D;
+    margin-top: 48px;
+    padding-left: 100px;
+}
+
+.registrar p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #717171;
+    margin-top: 16px;
+}
+
+.caixa_registro {
+    display: flex;
+    flex-direction: column;
+    font-family: "Inter", sans-serif;
+}
+
+.texto_registro {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    margin-top: 16px;
+}
+
+.escolha_registro {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+}
+
+select:invalid {
+    font-size: 14px;
+    padding: 14px;
+    color: #888;
+}
+
+option[value=""] {
+    color: #888;
+}
+
+.form_registro {
+    width: 320px;
+    height: 46px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    box-sizing: border-box;
+    margin-top: 6px;
+}
+
+.form_registro::placeholder {
+    font-size: 14px;
+    padding: 14px;
+}
+
+#ocorrido {
+    height: 130px;
+}
+
+.botao_enviar {
+    width: 320px;
+    height: 50px;
+    margin-top: 16px;
+    background-color: #015E20;
+    color: #FFFFFF;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.caixa_registro p {
+    color: #717171;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 11px;
 }
