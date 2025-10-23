@@ -3,7 +3,7 @@ const denunciaSchema = require("../validation/denuncia"); // Importa o Schema
 const { FieldValue } = require("firebase-admin/firestore"); // Importa FieldValue para soma atômica
 
 // PONTO FIXO: Quantos pontos uma denúncia vale na criação
-const PONTOS_POR_DENUNCIA = 5; 
+const PONTOS_POR_DENUNCIA = 20; 
 
 // Criar denúncia
 exports.createDenuncia = async (req, res) => {
@@ -108,6 +108,61 @@ exports.getDenuncias = async (req, res) => {
         res.json(denuncias);
     } catch (error) {
         // Usa o tratamento de erro básico de leitura, pois não é transacional
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Listar Denúncias do Usuário Logado (Histórico)
+exports.getUserDenuncias = async (req, res) => {
+    try {
+        const userId = req.userId; // ID do usuário logado
+
+        // Cria a referência ao documento do usuário (como você fez ao criar a denúncia)
+        const userRef = db.collection('usuarios').doc(userId); 
+
+        // Consulta as denúncias onde o campo 'usuario' é igual à referência do usuário
+        const snapshot = await db.collection("denuncias")
+            .where('usuario', '==', userRef) 
+            .get();
+
+        const denuncias = snapshot.docs.map(doc => {
+            // ... (Lógica de formatação de data que você já tem no getDenuncias)
+            // Vou simplificar aqui para a resposta:
+            return { id: doc.id, ...doc.data() };
+        });
+
+        res.json(denuncias);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Atualizar Status da Denúncia (Rota Admin)
+exports.updateDenunciaStatus = async (req, res) => {
+    try {
+        // Pega o ID da denúncia da URL
+        const denunciaId = req.params.id;
+        // Pega o novo status do corpo da requisição (Ex: { "status": "resolvido" })
+        const { status } = req.body; 
+
+        // TODO: Aqui, você deveria adicionar um middleware para checar se o usuário é Administrador.
+
+        // Validação básica do novo status
+        if (!status || !['pendente', 'em_analise', 'resolvido'].includes(status)) {
+            return res.status(400).json({ error: "Status inválido ou não fornecido." });
+        }
+
+        // Atualiza o documento no Firestore
+        await db.collection("denuncias").doc(denunciaId).update({
+            status: status,
+            data_ultima_modificacao: new Date() // Opcional: registrar quando foi mudado
+        });
+
+        res.status(200).json({ 
+            message: `Status da denúncia ${denunciaId} atualizado para ${status}.` 
+        });
+
+    } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };

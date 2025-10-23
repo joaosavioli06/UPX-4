@@ -44,3 +44,25 @@ exports.getUsers = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+
+// Buscar Perfil do Usuário Logado (Saldo/Pontos)
+exports.getProfile = async (req, res) => {
+    try {
+        // O ID do usuário logado é inserido pelo middleware de autenticação
+        const userId = req.userId; 
+
+        // Busca o documento do usuário no Firestore pelo seu ID
+        const doc = await db.collection("usuarios").doc(userId).get();
+
+        if (!doc.exists) {
+            return res.status(404).json({ error: "Perfil do usuário não encontrado." });
+        }
+
+        // Retorna o ID, email, nome, nível e pontos do usuário
+        res.status(200).json({ id: doc.id, ...doc.data() }); 
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
