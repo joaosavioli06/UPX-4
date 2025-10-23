@@ -54,4 +54,4 @@ form.addEventListener("submit", function(e) {
     .catch((error) => {
       alert("Erro ao verificar email: " + error.message);
     });
-}); //corregir os alert
+});
