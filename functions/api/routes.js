@@ -10,17 +10,17 @@ const DeslocamentoController = require("./controllers/DeslocamentoController");
 const TestController = require("./controllers/TestController");
 
 // Rotas de usuários
-router.get("/usuarios", UserController.getUsers); 
+router.get("/usuarios", protect, UserController.getUsers);
 // Criação de usuário (POST) deve ser protegida
 router.post("/usuarios", protect, UserController.createUser); 
 // Rota para buscar o perfil do usuário logado
-router.get("/usuarios/me", authMiddleware.protect, UserController.getProfile); // Adicione a nova rota e o Middleware
+router.get("/usuarios/me", protect, UserController.getProfile); 
 
 // Rotas de denúncias (GET e POST devem ser protegidas)
 router.get("/denuncias", protect, DenunciaController.getDenuncias);
 router.post("/denuncias", protect, DenunciaController.createDenuncia); 
-router.get("/denuncias/meu-historico", authMiddleware.protect, DenunciaController.getUserDenuncias); // Adicione a rota para histórico
-router.patch("/denuncias/:id/status", DenunciaController.updateDenunciaStatus); // Nova rota de atualização || ADMIN UPDATE DENÚNCIA
+router.get("/denuncias/meu-historico", protect, DenunciaController.getUserDenuncias);
+router.patch("/denuncias/:id/status", protect, DenunciaController.updateDenunciaStatus);
 
 // Rotas de deslocamentos (GET e POST devem ser protegidas)
 router.get("/deslocamentos", protect, DeslocamentoController.getDeslocamentos);
