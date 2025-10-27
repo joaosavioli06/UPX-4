@@ -791,6 +791,7 @@ option[value=""] {
     border-radius: 6px;
     font-size: 14px;
     font-weight: 500;
+    border: none;
 }
 
 .caixa_registro p {
@@ -798,4 +799,124 @@ option[value=""] {
     font-size: 14px;
     font-weight: 400;
     margin-top: 11px;
+}
+
+/* Recompensas */
+
+.titulo_recompensas {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 48px;
+    padding-left: 100px;
+    font-family: "Inter", sans-serif;
+}
+
+.titulo_recompensas h1 {
+    color: #4D4D4D;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.titulo_recompensas p {
+    color: #717171;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 16px;
+}
+
+.icones_premios {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    margin-top: 48px;
+    padding-left: 144px;
+}
+
+.progresso_container {
+    width: 846px;
+    height: 16px;
+    background-color: #D9D9D9;
+    border-radius: 24px;
+    overflow: hidden;
+    margin-left: 100px;
+    margin-top: 24px;
+}
+
+.progresso {
+    width: 0%;
+    height: 100%;
+    background-color: #015E20;
+    border-radius: 24px;
+    transition: width 0.4s ease;
+}
+
+.barra_premios p {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #717171;
+    margin-top: 16px;
+    padding-left: 108px;
+}
+
+.caixas_info {
+    display: flex;
+    /* justify-content: center; */
+    gap: 24px;
+    margin-top: 80px;
+    padding-left: 100px;
+}
+
+.info_texto {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.info_texto h3 {
+    margin: 0;
+    color: #4D4D4D;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.info_texto p {
+    color: #717171;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 8px 0 0 0;
+}
+
+.caixa {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    font-family: "Inter", sans-serif;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 389px;
+    height: 173px;
+}
+
+.caixa button {
+    background-color: #015E20;
+    color: #FFFFFF;
+    width: 158px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    align-self: flex-end;
+    margin-top: 9px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.caixa button:hover {
+    background-color: #00822B;
 }
