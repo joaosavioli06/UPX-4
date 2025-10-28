@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "ecotrek-802a6"
-  }
+    "default": "ecotrek-802a6",
+    "ecotrek": "ecotrek-802a6"
+  },
+  "targets": {},
+  "etags": {}
 }
