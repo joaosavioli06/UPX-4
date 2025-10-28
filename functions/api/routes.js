@@ -1,7 +1,9 @@
 const express = require("express");
-const router = express.Router();
+// CORRIGIDO: Variável renomeada de 'router' para 'routes' para evitar 'new-cap'
+// eslint-disable-next-line new-cap
+const routes = express.Router();
 
-const { protect } = require("./middlewares/authMiddleware"); 
+const {protect} = require("./middlewares/authMiddleware");
 
 // Importa os controladores
 const UserController = require("./controllers/UserController");
@@ -10,23 +12,51 @@ const DeslocamentoController = require("./controllers/DeslocamentoController");
 const TestController = require("./controllers/TestController");
 
 // Rotas de usuários
-router.get("/usuarios", protect, UserController.getUsers);
+// Quebra de linha e vírgula pendente para satisfazer o max-len
+routes.get("/usuarios",
+    protect,
+    UserController.getUsers,
+);
 // Criação de usuário (POST) deve ser protegida
-router.post("/usuarios", protect, UserController.createUser); 
+routes.post("/usuarios",
+    protect,
+    UserController.createUser,
+);
 // Rota para buscar o perfil do usuário logado
-router.get("/usuarios/me", protect, UserController.getProfile); 
+routes.get("/usuarios/me",
+    protect,
+    UserController.getProfile,
+);
 
 // Rotas de denúncias (GET e POST devem ser protegidas)
-router.get("/denuncias", protect, DenunciaController.getDenuncias);
-router.post("/denuncias", protect, DenunciaController.createDenuncia); 
-router.get("/denuncias/meu-historico", protect, DenunciaController.getUserDenuncias);
-router.patch("/denuncias/:id/status", protect, DenunciaController.updateDenunciaStatus);
+routes.get("/denuncias",
+    protect,
+    DenunciaController.getDenuncias,
+);
+routes.post("/denuncias",
+    protect,
+    DenunciaController.createDenuncia,
+);
+routes.get("/denuncias/meu-historico",
+    protect,
+    DenunciaController.getUserDenuncias,
+);
+routes.patch("/denuncias/:id/status",
+    protect,
+    DenunciaController.updateDenunciaStatus,
+);
 
 // Rotas de deslocamentos (GET e POST devem ser protegidas)
-router.get("/deslocamentos", protect, DeslocamentoController.getDeslocamentos);
-router.post("/deslocamentos", protect, DeslocamentoController.createDeslocamento);
+routes.get("/deslocamentos",
+    protect,
+    DeslocamentoController.getDeslocamentos,
+);
+routes.post("/deslocamentos",
+    protect,
+    DeslocamentoController.createDeslocamento,
+);
 
 // Teste de conexão
-router.get("/test", TestController.testConnection);
+routes.get("/test", TestController.testConnection);
 
-module.exports = router;
+module.exports = routes; // Exportando a variável 'routes'
