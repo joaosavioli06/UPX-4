@@ -80,39 +80,9 @@
                     <p>Você ganhará 20 pontos pela sua contribuição</p>
                 </form>
             </div>
-
-            <script>
-                var map = L.map('map').setView([-23.5015, -47.4526], 13);
-
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
-
-                L.marker([-23.5015, -47.4526]).addTo(map)
-                    .bindPopup("Sorocaba - SP")
-                    .openPopup();
-            </script>
         </div>
     </main>
-
-    <!-- <footer class="rodape">
-        <a href="/" class="cadeirante_icone">
-            <img src="./src/img/Cadeirante-icone-branco.png" alt="Icone de cadeirante">
-            <h2 class="titulo_rodape">EcoTrek</h2>
-        </a>
-
-        <div>
-            <p class="copyright">Copyright © 2025 EcoTreck Ltd. Todos os direitos reservados.</p>
-        </div>
-
-        <div class="redes-sociais">
-            <img class="instagram" src="./src/img/Icone-instagram.png" alt="Icone do instagram">
-            <img class="pesquisa" src="./src/img/Icone-pesquisa.png" alt="Icone de pesquisa">
-            <img class="twitter" src="./src/img/Icone-twitter.png" alt="Icone do twitter">
-            <img class="youtube" src="./src/img/Icone-youtube.png" alt="Icone do youtube">
-        </div>
-    </footer> -->
+    <script src="./src/js/script.js"></script>
 </body>
 
 </html>

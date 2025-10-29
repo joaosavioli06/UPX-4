@@ -47,6 +47,11 @@
     font-size: 16px;
 }
 
+.navegacao a.ativo {
+    color: #058530;
+    font-weight: 600;
+}
+
 .navegacao a:hover {
     color: #058530;
 }
@@ -734,6 +739,32 @@ input:checked+.slider::before {
     margin-top: 16px;
 }
 
+input {
+    padding: 14px;
+}
+
+textarea {
+    padding: 14px;
+}
+
+label:has(+input:required)::after {
+    content: " *";
+    color: #f55252;
+    font-weight: 700;
+}
+
+label:has(+textarea:required)::after {
+    content: " *";
+    color: #f55252;
+    font-weight: 700;
+}
+
+label:has(+select:required)::after {
+    content: " *";
+    color: #f55252;
+    font-weight: 700;
+}
+
 .caixa_registro {
     display: flex;
     flex-direction: column;
@@ -775,7 +806,7 @@ option[value=""] {
 
 .form_registro::placeholder {
     font-size: 14px;
-    padding: 14px;
+    /* padding: 14px; */
 }
 
 #ocorrido {
