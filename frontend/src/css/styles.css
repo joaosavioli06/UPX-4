@@ -747,6 +747,10 @@ textarea {
     padding: 14px;
 }
 
+select {
+    padding: 14px;
+}
+
 label:has(+input:required)::after {
     content: " *";
     color: #f55252;
@@ -811,6 +815,8 @@ option[value=""] {
 
 #ocorrido {
     height: 130px;
+    font-family: "Inter", sans-serif;
+
 }
 
 .botao_enviar {
@@ -823,6 +829,7 @@ option[value=""] {
     font-size: 14px;
     font-weight: 500;
     border: none;
+    cursor: pointer;
 }
 
 .caixa_registro p {
@@ -830,6 +837,79 @@ option[value=""] {
     font-size: 14px;
     font-weight: 400;
     margin-top: 11px;
+}
+
+#modal-mapa {
+    padding: 40px 56px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 833px;
+    height: 472px;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.titulo_revisao {
+    font-family: "Inter", sans-serif;
+    color: #4D4D4D;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.modal_registro {
+    width: 320px;
+    height: 46px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    box-sizing: border-box;
+    margin-top: 6px;
+}
+
+#modal_ocorrido {
+    width: 721px;
+    height: 130px;
+    font-family: "Inter", sans-serif;
+
+}
+
+.caixa_modal {
+    display: flex;
+    flex-direction: column;
+    font-family: "Inter", sans-serif;
+    margin-top: 32px;
+}
+
+#enviar {
+    width: 320px;
+    height: 40px;
+    margin-top: 16px;
+    background-color: #015E20;
+    color: #FFFFFF;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    margin-left: auto;
+}
+
+.fechar-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    right: 56px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Cor preta com 70% de opacidade */
 }
 
 /* Recompensas */
@@ -996,11 +1076,11 @@ summary {
 }
 
 summary::after {
-  content: "⌄";
-  float: right;
-  transition: transform 0.3s ease;
+    content: "⌄";
+    float: right;
+    transition: transform 0.3s ease;
 }
 
 details[open] summary::after {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }

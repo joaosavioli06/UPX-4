@@ -60,13 +60,13 @@
                         <option value="lixo">Lixo acumulado</option>
                     </select>
 
-                    <label class="texto_registro" for="endereco">Endereço</label>
-                    <input class="form_registro" type="text" id="endereco" name="endereco"
-                        placeholder="Inserir endereço" required>
-
                     <label class="texto_registro" for="cep">CEP</label>
                     <input class="form_registro" type="text" id="cep" name="cep" pattern="\d{5}-?\d{3}"
                         placeholder="Inserir cep" required>
+
+                    <label class="texto_registro" for="endereco">Endereço</label>
+                    <input class="form_registro" type="text" id="endereco" name="endereco"
+                        placeholder="Inserir endereço" required>
 
                     <label class="texto_registro" for="referencia">Ponto de referência</label>
                     <input class="form_registro" type="text" id="referencia" name="referencia"
@@ -76,13 +76,36 @@
                     <textarea class="form_registro" id="ocorrido" name="ocorrido" rows="4"
                         placeholder="Descreva em detalhes" required></textarea>
 
-                    <button type="submit" class="botao_enviar">Registrar reclamação</button>
+                    <button type="button" class="botao_enviar" id="abrir-modal">Registrar reclamação</button>
                     <p>Você ganhará 20 pontos pela sua contribuição</p>
                 </form>
+
+                <dialog id="modal-mapa">
+                    <h1 class="titulo_revisao">Revisar solicitação</h1>
+                    <span class="fechar-modal">&times;</span>
+
+                    <form action="#" method="post" class="caixa_modal">
+                        <label class="escolha_registro" for="modal_reclamacao">Tipo de reclamação</label>
+                        <select class="modal_registro" name="reclamacao" id="modal_reclamacao" required>
+                            <option value="" disabled selected hidden>Selecionar reclamação</option>
+                            <option value="buracos">Buracos na rua</option>
+                            <option value="transporte">Transporte público</option>
+                            <option value="acessibilidade">Falta de acessibilidade</option>
+                            <option value="iluminacao">Iluminação pública</option>
+                            <option value="areas">Áreas verdes</option>
+                            <option value="lixo">Lixo acumulado</option>
+                        </select>
+
+                        <label class="texto_registro" for="modal_ocorrido">Informe o que aconteceu</label>
+                        <textarea class="modal_registro" id="modal_ocorrido" name="ocorrido" rows="4"
+                            placeholder="Descreva em detalhes" required></textarea>
+
+                        <button type="submit" class="botao_enviar" id="enviar">Registrar reclamação</button>
+                    </form>
+                </dialog>
             </div>
         </div>
     </main>
     <script src="./src/js/script.js"></script>
 </body>
-
 </html>
