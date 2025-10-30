@@ -10,48 +10,77 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const auth = firebase.auth();
 
 const form = document.querySelector(".caixa_cadastro");
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
+    const nome = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
+    const confirmarSenha = document.getElementById("confirmar-senha").value;
+    const termo = document.getElementById("termo").checked;
 
-  const nome = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const senha = document.getElementById("senha").value;
-  const confirmarSenha = document.getElementById("confirmar-senha").value;
-  const termo = document.getElementById("termo").checked;
+    if (!termo) {
+        alert("Você deve aceitar os termos de uso.");
+        return;
+    }
 
-  if (!termo) {
-    alert("Você deve aceitar os termos de uso.");
-    return;
-  }
+    if (senha !== confirmarSenha) {
+        alert("As senhas não coincidem.");
+        return;
+    }
 
-  if (senha !== confirmarSenha) {
-    alert("As senhas não coincidem.");
-    return;
-  }
+    try {
+        const snapshot = await db.collection("usuarios").where("email", "==", email).get();
+        if (!snapshot.empty) {
+            alert("Este email já está registrado!");
+            return;
+        }
 
-  db.collection("usuarios").where("email", "==", email).get()
-    .then((querySnapshot) => {
-      if (!querySnapshot.empty) {
-        alert("Este email já está registrado!");
-      } else {
-        db.collection("usuarios").add({
-          nome: nome,
-          email: email,
-          senha: senha
-        })
-        .then(() => {
-          alert("Usuário registrado com sucesso!");
-          form.reset();
-        })
-        .catch((error) => {
-          alert("Erro ao registrar: " + error.message);
+        await db.collection("usuarios").add({
+            nome: nome,
+            email: email,
+            senha: senha
         });
+
+        alert("Usuário registrado com sucesso!");
+        form.reset();
+    } catch (error) {
+        alert("Erro ao registrar usuário: " + error.message);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const googleBtn = document.querySelector(".registro_google");
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  googleBtn.addEventListener("click", async () => {
+    googleBtn.disabled = true; 
+    try {
+      const result = await auth.signInWithPopup(provider);
+      const user = result.user;
+
+      const docRef = db.collection("usuarios").doc(user.uid);
+      const doc = await docRef.get();
+
+      if (!doc.exists) {
+        await docRef.set({
+          nome: user.displayName,
+          email: user.email,
+          foto: user.photoURL
+        });
+        alert("Registro con Google exitoso!");
+      } else {
+        alert("Inicio de sesión con Google exitoso!");
       }
-    })
-    .catch((error) => {
-      alert("Erro ao verificar email: " + error.message);
-    });
+
+    } catch (error) {
+      console.error("Error en Google login:", error);
+      alert("Error al iniciar sesión con Google: " + error.message);
+    } finally {
+      googleBtn.disabled = false; 
+    }
+  });
 });
