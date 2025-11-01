@@ -29,12 +29,14 @@
             <div>
                 <h1>Acessar conta</h1>
 
-                <form action="#" method="post" class="caixa_cadastro">
+                <form id="login-form" action="#" method="post" class="caixa_cadastro">
                     <label class="texto_login" for="email">Login</label>
-                    <input class="form_login" type="email" placeholder="E-mail" name="email" id="email">
+                    <input class="form_login" type="email" placeholder="E-mail" name="email" id="email" required>
+                    <div id="email-error" class="error-msg"></div>
 
                     <label class="texto_login" for="senha">Senha</label>
-                    <input class="form_login" type="password" placeholder="Inserir senha" name="senha" id="senha">
+                    <input class="form_login" type="password" placeholder="Inserir senha" name="senha" id="senha" required>
+                    <div id="senha-error" class="error-msg"></div>
 
                     <div class="guardar_senha">
                         <label class="switch">
@@ -43,7 +45,6 @@
                         </label>
 
                         <label for="lembrar" class="texto_lembrar">Lembrar</label>
-
                         <a href="#" class="esqueceu_senha">Esqueceu a senha?</a>
                     </div>
 
@@ -52,10 +53,11 @@
 
                         <div id="linha_horizontal"></div>
 
-                        <a href="#" class="registro_google">
+                        <!-- Botão de Google -->
+                        <button type="button" id="googleLogin" class="registro_google">
                             <img src="./src/img/Icone-google.png" alt="Icone do Google">
-                            Se cadastar com Google
-                        </a>
+                            Entrar com Google
+                        </button>
                     </div>
 
                     <div class="crie_conta">
@@ -66,6 +68,14 @@
             </div>
         </section>
     </main>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+   
+    <script src="./src/js/config.js"></script>
+    <script src="./src/js/login.js"></script>
 </body>
 
 </html>

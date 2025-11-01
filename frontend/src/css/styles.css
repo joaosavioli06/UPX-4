@@ -1084,3 +1084,8 @@ summary::after {
 details[open] summary::after {
     transform: rotate(180deg);
 }
+.error-msg {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 3px;
+}

@@ -1,7 +1,7 @@
 // 1. Configurações do seu Projeto Firebase
 const firebaseConfig = {
   // ATENÇÃO: Substitua pelos valores reais do seu painel do Firebase (Configurações do Projeto)
-  apiKey: "SUA_API_KEY_AQUI", 
+  apiKey: "AIzaSyAcrMfjl3ft64AfB7JfS4OcgpML_aiRucs", 
   authDomain: "ecotrek-802a6.firebaseapp.com",
   projectId: "ecotrek-802a6",
   storageBucket: "ecotrek-802a6.appspot.com",
