@@ -129,7 +129,7 @@ document.getElementById('endereco').addEventListener('keypress', function (e) {
     }
 });
 
-const modal = document.getElementById("modal-mapa");
+const modal = document.getElementById("modal");
 const abrirModal = document.getElementById("abrir-modal");
 const fecharModal = document.getElementsByClassName('fechar-modal')[0]
 

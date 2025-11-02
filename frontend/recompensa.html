@@ -80,8 +80,146 @@
                         <p>Confira as próximas recompensas disponíveis</p>
                     </div>
                 </div>
-                <button>Ver recompensas</button>
+                <button type="button" id="abrir-recomp">Ver recompensas</button>
             </article>
+
+            <dialog id="modal-recomp">
+                <div class="conteudo_recomp">
+                    <span class="fechar-recomp">&times;</span>
+                    <h2>Próximas recompensas</h2>
+                    <p>Ajude sua cidade e descubra as próximas conquistas que você pode desbloquear.</p>
+                </div>
+
+                <div class="container_cards">
+                    <button class="btn_voltar">&#8592;</button>
+
+                    <div class="carrossel-wrapper">
+
+                        <div class="cards" id="carrossel">
+                            <div class="card" id="nivel1">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 1
+                                </span>
+
+                                <h3>10% off</h3>
+                                <p class="sub">GreenHouse Decor</p>
+                                <p>Decoração ecológica e minimalista</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel2">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 2
+                                </span>
+
+                                <h3>10% off</h3>
+                                <p class="sub">CityCoffee</p>
+                                <p>Cafeteria com desconto pra quem vai de bike ou a pé</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel3">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 3
+                                </span>
+
+                                <h3>10% off</h3>
+                                <p class="sub">EcoTech</p>
+                                <p>Eletrônicos de baixo consumo e energia solar</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel4">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 4
+                                </span>
+
+                                <h3>15% off</h3>
+                                <p class="sub">NatureBox</p>
+                                <p>Cosméticos naturais, veganos e cruelty-free</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel5">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 5
+                                </span>
+
+                                <h3>15% off</h3>
+                                <p class="sub">ReUseStore</p>
+                                <p>Moda feita com materiais reciclados</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel6">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 6
+                                </span>
+
+                                <h3>25% off</h3>
+                                <p class="sub">EcoBus Pass</p>
+                                <p>Créditos para transporte público sustentável</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel7">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 7
+                                </span>
+
+                                <h3>25% off</h3>
+                                <p class="sub">BioPet</p>
+                                <p>Produtos ecológicos e naturais para pets</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel8">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 8
+                                </span>
+
+                                <h3>30% off</h3>
+                                <p class="sub">RideNow</p>
+                                <p>Aluguel de bikes e patinetes elétricas</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel9">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 9
+                                </span>
+
+                                <h3>30% off</h3>
+                                <p class="sub">EcoMarket Deli</p>
+                                <p>Mercado urbano de produtos orgânicos e locais</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+
+                            <div class="card" id="nivel10">
+                                <span class="nivel">
+                                    <img src="./src/img/Bloqueado.svg" alt="Cadeado fechado">
+                                    Nível 10
+                                </span>
+
+                                <h3>40% off</h3>
+                                <p class="sub">ReCity Market</p>
+                                <p>Itens sustentáveis para o dia a dia urbano</p>
+                                <button class="indisponivel">Prêmio indisponível</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn_avancar">&#8594;</button>
+                </div>
+            </dialog>
 
             <article class="caixa">
                 <div class="info_texto">
@@ -91,8 +229,29 @@
                         <p>Chegou a hora de aproveitar suas recompensas</p>
                     </div>
                 </div>
-                <button>Resgatar prêmio</button>
+                <button type="button" id="abrir-premio">Resgatar prêmio</button>
             </article>
+
+            <dialog id="modal-premio" class="premio">
+                <span class="fechar-premio">&times;</span>
+                <!-- <img class="confetes" src="./src/img/Confetes.svg" alt="Confetes"> -->
+
+                <div class="forma">
+                    <h2>Seu 1º Prêmio é da GreenHouse Decor!</h2>
+                    <h3 class="desconto">
+                        <span class="valor">10%</span>
+                        <span class="texto">desconto</span>
+                    </h3>
+
+                    <p>A loja que une design minimalista e consciência ecológica para transformar seu lar em um refúgio
+                        sustentável.</p>
+                    <p>Use seu cupom e descubra o poder da decoração que respeita o planeta!</p>
+                    <button type="button" class="resgate">Resgatar prêmio</button>
+                </div>
+                <!-- <button type="button" class="resgate">Resgatar prêmio</button> -->
+            </dialog>
+
+
 
             <article class="caixa">
                 <div class="info_texto">
@@ -102,11 +261,59 @@
                         <p>Confira no mapa o status: em análise, aprovada ou negada.</p>
                     </div>
                 </div>
-                <button>Resgatar prêmio</button>
+                <button type="button" id="abrir-solic">Resgatar prêmio</button>
             </article>
+
+            <dialog id="modal-solic" class="modal_solic">
+                <h1>Status de solicitação</h1>
+                <span class="fechar-solic">&times;</span>
+
+                <details class="novidades">
+                    <summary class="andamento">
+                        <img src="./src/img/Andamento.svg" alt="Relógio">
+                        Em andamento
+                    </summary>
+                    <h3>Tipo de reclamação</h3>
+                    <p>Buraco na rua</p>
+
+                    <h3>Informe o que aconteceu</h3>
+                    <p>Há um buraco no asfalto na **********, próximo ao número ***. A situação dificulta o tráfego de
+                        veículos e coloca pedestres e motoristas em risco, especialmente à noite ou em dias de chuva.
+                    </p>
+                </details>
+
+                <details class="novidades">
+                    <summary class="aprovado">
+                        <img src="./src/img/Aprovado.svg" alt="Verificado aprovado">
+                        Aprovado
+                    </summary>
+                    <h3>Tipo de reclamação</h3>
+                    <p>Buraco na rua</p>
+
+                    <h3>Informe o que aconteceu</h3>
+                    <p>Há um buraco no asfalto na **********, próximo ao número ***. A situação dificulta o tráfego de
+                        veículos e coloca pedestres e motoristas em risco, especialmente à noite ou em dias de chuva.
+                    </p>
+                </details>
+
+                <details class="novidades">
+                    <summary class="recusado">
+                        <img src="./src/img/Negado.svg" alt="Verificado negado">
+                        Recusado
+                    </summary>
+                    <h3>Tipo de reclamação</h3>
+                    <p>Buraco na rua</p>
+
+                    <h3>Informe o que aconteceu</h3>
+                    <p>Há um buraco no asfalto na **********, próximo ao número ***. A situação dificulta o tráfego de
+                        veículos e coloca pedestres e motoristas em risco, especialmente à noite ou em dias de chuva.
+                    </p>
+                </details>
+            </dialog>
         </section>
     </main>
     <script src="./src/js/script.js"></script>
+    <script src="./src/js/recompensa.js"></script>
 </body>
 
 </html>
