@@ -1,4 +1,4 @@
-![](/frontend/src/img/project_logo_rmv_background.png/)
+![](/frontend/src/img/Logo-Ecotrek.png)
 
 # Usina de Projetos Experimentais 4 - Grupo ODSCoders
 
