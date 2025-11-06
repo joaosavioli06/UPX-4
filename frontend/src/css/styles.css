@@ -1264,68 +1264,94 @@ button.ativo:hover {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 } */
 
+.premio {
+  position: relative;
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+  background: #fff;
+  overflow: hidden;
+}
+
 .confetes {
-    width: 833px;
-    height: 472px;
-}
-
-.premio h2 {
-    font-size: 22px;
-    font-weight: 400;
-    color: #717171;
-}
-
-.premio p {
-    font-size: 18px;
-    color: #717171;
-    margin-top: 24px;
-    margin-bottom: 24px;
-}
-
-.desconto {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-
-.desconto .valor {
-    font-size: 78px;
-    font-weight: 800;
-    color: #015E20;
-    margin-top: 23px;
-}
-
-.desconto .texto {
-    font-size: 18px;
-    font-weight: 500;
-    color: #717171;
-    margin-top: 63px;
-}
-
-.resgate {
-    background-color: #015E20;
-    color: #FFFFFF;
-    width: 152px;
-    height: 40px;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-top: 31px;
-    /* padding: 8px 16px; */
-    cursor: pointer;
-
-}
-
-.resgate:hover {
-    background-color: #00822B;
+  position: absolute;
+  top: -170px;
+  left: -130px;
+  width: 120%;
+  height: 140%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.95;
 }
 
 .forma {
-    width: 598px;
-    height: 258px;
-    margin: 30px;
-    margin-left: 40px;
+  position: relative;
+  z-index: 1;
+  width: 598px;
+  height: 258px;
+  margin: 60px auto;
+  text-align: left;
+}
+
+.nome {
+  font-size: 22px;
+  font-weight: 400;
+  color: #717171;
+}
+
+.descricao {
+  font-size: 18px;
+  color: #717171;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.extra {
+  font-size: 18px;
+  color: #717171;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.desconto {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.desconto .valor {
+  font-size: 78px;
+  font-weight: 800;
+  color: #015E20;
+  margin-top: 23px;
+}
+
+.desconto .texto {
+  font-size: 18px;
+  font-weight: 500;
+  color: #717171;
+  margin-top: 63px;
+}
+
+.resgate {
+  background-color: #015E20;
+  color: #FFFFFF;
+  width: 152px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 31px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: block;
+  margin-left: auto;  
+}
+
+.resgate:hover {
+  background-color: #00822B;
 }
 
 .modal_solic h1 {
@@ -1397,6 +1423,15 @@ button.ativo:hover {
     padding: 2px 6px;
     gap: 4px;
     cursor: pointer;
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
 }
 
 /* FAQ */
