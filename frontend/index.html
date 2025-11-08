@@ -13,11 +13,6 @@
 </head>
 
 <body>
-    <header class="topo-usuario">
-        <p id="user-info"></p>
-        <button id="logout-btn" style="display:none;">Sair</button>
-    </header>
-
     <header class="cabecalho">
         <a href="/" class="cadeirante_icone">
             <img src="./src/img/Cadeirante-icone.svg" alt="Icone de cadeirante">
@@ -35,9 +30,16 @@
         </nav>
 
         <div class="acoes">
+            <div id="user-info" style="display:none;">
+                <img id="user-img" class="icone_perfil" src="" alt="Foto do usuário" style="display:none;">
+                <span class="user-nome"></span>
+            </div>
+            <button class="botao_sair" style="display:none;">Sair</button>
+
             <a href="./login.html" class="botao_login">Login</a>
             <a href="./registro.html" class="botao_cadastro">Cadastre-se</a>
         </div>
+
     </header>
 
     <main class="conteudo_principal">
@@ -97,7 +99,8 @@
 
         <section class="exemplos-2">
             <div class="exploracao">
-                <img class="imagem_exploracao" src="./src/img/Localização.svg" alt="Pessoa se localizando através do mapa">
+                <img class="imagem_exploracao" src="./src/img/Localização.svg"
+                    alt="Pessoa se localizando através do mapa">
 
                 <div>
                     <h2 class="exploracao_mapa">Explore o mapa e se localize!</h2>
@@ -111,13 +114,15 @@
 
         <section class="exemplos-3">
             <div class="solicitacao">
-                <img class="imagem_solicitacao" src="./src/img/Solicitação.svg" alt="Pessoa registrando sua solicitação">
+                <img class="imagem_solicitacao" src="./src/img/Solicitação.svg"
+                    alt="Pessoa registrando sua solicitação">
 
                 <div>
                     <h2 class="solicitacao_reclamacao">Registre sua reclamação e envie sua solicitação!</h2>
                     <ul class="topicos_solicitacao">
                         <li>No mapa, clique no ponto que representa o local do problema de acessibilidade.</li>
-                        <li>Preencha o formulário explicando o que precisa ser melhorado (ex.: falta de rampas, buracos, sinalização).</li>
+                        <li>Preencha o formulário explicando o que precisa ser melhorado (ex.: falta de rampas, buracos,
+                            sinalização).</li>
                         <li>Depois, é só enviar e acompanhar o status em tempo real pela sua conta.</li>
                     </ul>
 
@@ -153,10 +158,10 @@
         </div>
     </footer>
 
-<script type="module" src="./src/js/config.js"></script>
-<script type="module" src="./src/js/login.js"></script>
-<script type="module" src="./src/js/auth.js"></script>
-
+    <script src="./src/js/script.js"></script>
+    <script type="module" src="./src/js/config.js"></script>
+    <script type="module" src="./src/js/login.js"></script>
+    <script type="module" src="./src/js/auth.js"></script>
 </body>
 
 </html>

@@ -61,25 +61,38 @@
     list-style: none;
     gap: 34px;
     align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .acoes a {
     font-family: "Inter", sans-serif;
     font-size: 14px;
     font-weight: 600;
+
+}
+
+.botao_login,
+.botao_cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 125px;
+    height: 40px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    transition: background 0.3s ease;
+    line-height: 1;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .botao_login {
     color: #015E20;
     background-color: #F5F7FA;
-    padding: 20px 10px;
-    border-radius: 6px;
-    transition: background 0.3s ease;
-    width: 77px;
-    height: 40px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+    text-decoration: none;
 }
 
 .botao_login:hover {
@@ -90,17 +103,43 @@
 .botao_cadastro {
     color: #FFFFFF;
     background-color: #015E20;
-    padding: 20px 10px;
-    border-radius: 6px;
-    transition: background 0.3s ease;
-    width: 125px;
-    height: 40px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+    text-decoration: none;
 }
 
 .botao_cadastro:hover {
+    background-color: #00822B;
+}
+
+#user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #00822B;
+}
+
+.icone_perfil {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #015E20;
+}
+
+.botao_sair {
+    display: none;
+    background-color: #015E20;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.botao_sair:hover {
     background-color: #00822B;
 }
 
@@ -1265,93 +1304,93 @@ button.ativo:hover {
 } */
 
 .premio {
-  position: relative;
-  border: none;
-  border-radius: 10px;
-  padding: 0;
-  background: #fff;
-  overflow: hidden;
+    position: relative;
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    background: #fff;
+    overflow: hidden;
 }
 
 .confetes {
-  position: absolute;
-  top: -170px;
-  left: -130px;
-  width: 120%;
-  height: 140%;
-  object-fit: cover;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.95;
+    position: absolute;
+    top: -170px;
+    left: -130px;
+    width: 120%;
+    height: 140%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.95;
 }
 
 .forma {
-  position: relative;
-  z-index: 1;
-  width: 598px;
-  height: 258px;
-  margin: 60px auto;
-  text-align: left;
+    position: relative;
+    z-index: 1;
+    width: 598px;
+    height: 258px;
+    margin: 60px auto;
+    text-align: left;
 }
 
 .nome {
-  font-size: 22px;
-  font-weight: 400;
-  color: #717171;
+    font-size: 22px;
+    font-weight: 400;
+    color: #717171;
 }
 
 .descricao {
-  font-size: 18px;
-  color: #717171;
-  margin-top: 20px;
-  margin-bottom: 20px;
+    font-size: 18px;
+    color: #717171;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .extra {
-  font-size: 18px;
-  color: #717171;
-  margin-top: 20px;
-  margin-bottom: 20px;
+    font-size: 18px;
+    color: #717171;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .desconto {
-  display: flex;
-  align-items: center;
-  margin: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
 }
 
 .desconto .valor {
-  font-size: 78px;
-  font-weight: 800;
-  color: #015E20;
-  margin-top: 23px;
+    font-size: 78px;
+    font-weight: 800;
+    color: #015E20;
+    margin-top: 23px;
 }
 
 .desconto .texto {
-  font-size: 18px;
-  font-weight: 500;
-  color: #717171;
-  margin-top: 63px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #717171;
+    margin-top: 63px;
 }
 
 .resgate {
-  background-color: #015E20;
-  color: #FFFFFF;
-  width: 152px;
-  height: 40px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  margin-top: 31px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  display: block;
-  margin-left: auto;  
+    background-color: #015E20;
+    color: #FFFFFF;
+    width: 152px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 31px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: block;
+    margin-left: auto;
 }
 
 .resgate:hover {
-  background-color: #00822B;
+    background-color: #00822B;
 }
 
 .modal_solic h1 {
@@ -1426,12 +1465,19 @@ button.ativo:hover {
 }
 
 .fadeOut {
-  animation: fadeOut 0.3s ease forwards;
+    animation: fadeOut 0.3s ease forwards;
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0; transform: scale(0.95); }
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
 }
 
 /* FAQ */
