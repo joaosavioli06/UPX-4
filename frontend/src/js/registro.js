@@ -55,6 +55,7 @@ async function handleRegister(event) {
     await setDoc(doc(db, "usuarios", user.uid), {
       nome,
       email,
+      pontos: 0,
       criadoEm: serverTimestamp()
     });
 
@@ -90,6 +91,7 @@ async function handleGoogleRegister(event) {
         nome: user.displayName || "Usuário Google",
         email: user.email,
         foto: user.photoURL || "",
+        pontos: 0,
         criadoEm: serverTimestamp()
       });
     }

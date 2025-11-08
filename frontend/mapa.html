@@ -51,7 +51,7 @@
             <div id="map"></div>
 
             <div>
-                <form action="#" method="post" class="caixa_registro">
+                <form onsubmit="return false;" class="caixa_modal">
                     <label class="escolha_registro" for="reclamacao">Tipo de reclamação</label>
                     <select class="form_registro" name="reclamacao" id="reclamacao" required>
                         <option value="" disabled selected hidden>Selecionar reclamação</option>
@@ -79,7 +79,7 @@
                     <textarea class="form_registro" id="ocorrido" name="ocorrido" rows="4"
                         placeholder="Descreva em detalhes" required></textarea>
 
-                    <button type="button" class="botao_enviar" id="abrir-modal">Registrar reclamação</button>
+                    <button type="button" class="botao_enviar" id="enviar">Registrar reclamação</button>
                     <p>Você ganhará 20 pontos pela sua contribuição</p>
                 </form>
 
@@ -87,7 +87,7 @@
                     <h1 class="titulo_revisao">Revisar solicitação</h1>
                     <span class="fechar-modal">&times;</span>
 
-                    <form action="#" method="post" class="caixa_modal">
+                    <form onsubmit="return false;" class="caixa_modal">
                         <label class="escolha_registro" for="modal_reclamacao">Tipo de reclamação</label>
                         <select class="modal_registro" name="reclamacao" id="modal_reclamacao" required>
                             <option value="" disabled selected hidden>Selecionar reclamação</option>
@@ -103,13 +103,16 @@
                         <textarea class="modal_registro" id="modal_ocorrido" name="ocorrido" rows="4"
                             placeholder="Descreva em detalhes" required></textarea>
 
-                        <button type="submit" class="botao_enviar" id="enviar">Registrar reclamação</button>
+                        <button type="button" class="botao_enviar" id="abrir-modal">Registrar reclamação</button>
                     </form>
                 </dialog>
             </div>
         </div>
     </main>
     <script src="./src/js/script.js"></script>
+    <script type="module" src="./src/js/denuncias.js"></script>
     <script type="module" src="./src/js/auth.js"></script>
+
+
 </body>
 </html>

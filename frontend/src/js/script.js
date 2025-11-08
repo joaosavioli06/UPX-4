@@ -71,10 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 map.removeLayer(marcadorAtual);
             }
 
-            marcadorAtual = L.marker(e.latlng).addTo(map);
-            marcadorAtual.bindPopup(
-                "Coordenadas: " + e.latlng.lat.toFixed(5) + ", " + e.latlng.lng.toFixed(5)
-            ).openPopup();
+            marcadorAtual = L.marker(e.latlng).addTo(map)
+                .bindPopup(`Coordenadas: ${e.latlng.lat.toFixed(5)}, ${e.latlng.lng.toFixed(5)}`)
+                .openPopup();
+
+            // Guardar coordenadas para la denuncia
+            localStorage.setItem("latitude", e.latlng.lat);
+            localStorage.setItem("longitude", e.latlng.lng);
         }
 
         map.on("click", onMapClick);
@@ -109,6 +112,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         marcadorAtual = L.marker([lat, lon]).addTo(map);
                         marcadorAtual.bindPopup(`Endereço localizado:<br>${data[0].display_name}`).openPopup();
+
+                        // Guardar coordenadas de la búsqueda
+                        localStorage.setItem("latitude", lat);
+                        localStorage.setItem("longitude", lon);
+                        
+                        const enderecoInput = document.getElementById("endereco");
+                        if (cep && enderecoInput) {
+                            const endereco = data[0].address?.road || ""; // extrae solo la rua
+                            enderecoInput.value = endereco;
+                        }
+                        
                     } else {
                         alert("Endereço não encontrado. Tente ser mais específico.");
                     }
@@ -120,14 +134,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Eventos de tecla Enter
-        document.getElementById("cep")?.addEventListener("keypress", function (e) {
+        document.getElementById("cep")?.addEventListener("keypress", e => {
             if (e.key === "Enter") {
                 e.preventDefault();
                 buscarEndereco();
             }
         });
-
-        document.getElementById("endereco")?.addEventListener("keypress", function (e) {
+        document.getElementById("endereco")?.addEventListener("keypress", e => {
             if (e.key === "Enter") {
                 e.preventDefault();
                 buscarEndereco();
@@ -139,22 +152,31 @@ document.addEventListener("DOMContentLoaded", () => {
     // EcoTrek - Modal de denúncia
     // =============================
 
+    const abrirModal = document.getElementById("enviar"); // botão do formulario
     const modal = document.getElementById("modal");
-    const abrirModal = document.getElementById("abrir-modal");
-    const fecharModal = document.getElementsByClassName("fechar-modal")[0];
 
     if (abrirModal && modal) {
         abrirModal.addEventListener("click", () => {
-            const reclamacao = document.getElementById("reclamacao")?.value;
-            const ocorrido = document.getElementById("ocorrido")?.value;
+            const tipo = document.getElementById("reclamacao")?.value;
+            const descricao = document.getElementById("ocorrido")?.value;
+            const lat = localStorage.getItem("latitude");
+            const lng = localStorage.getItem("longitude");
 
-            document.getElementById("modal_reclamacao").value = reclamacao || "";
-            document.getElementById("modal_ocorrido").value = ocorrido || "";
+            // Validación
+            if (!tipo) { alert("Por favor, selecione o tipo de reclamação."); return; }
+            if (!descricao) { alert("Por favor, descreva o ocorrido."); return; }
+            if (!lat || !lng) { alert("Por favor, clique em um ponto no mapa para selecionar a localização."); return; }
+
+            // Copiar valores al modal
+            document.getElementById("modal_reclamacao").value = tipo;
+            document.getElementById("modal_ocorrido").value = descricao;
 
             modal.showModal();
         });
     }
 
+    // fechar modal
+    const fecharModal = document.querySelector(".fechar-modal");
     if (fecharModal && modal) {
         fecharModal.addEventListener("click", () => modal.close());
     }
