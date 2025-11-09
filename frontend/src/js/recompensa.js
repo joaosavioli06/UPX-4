@@ -176,7 +176,9 @@ if (auth && auth.onAuthStateChanged) {
 
 abrirModalSolic?.addEventListener("click", async () => {
   modalSolic.showModal();
-  tabelaBody.innerHTML = "";
+
+  const listaDenuncias = document.getElementById("lista-denuncias");
+  listaDenuncias.innerHTML = "<p>Carregando denúncias...</p>";
 
   const user = auth.currentUser;
   if (!user) return;
@@ -185,39 +187,56 @@ abrirModalSolic?.addEventListener("click", async () => {
   const q = query(denunciasRef, where("usuarioId", "==", user.uid));
   const querySnapshot = await getDocs(q);
 
-  denunciasAprovadas = 0;
-
   if (querySnapshot.empty) {
-    tabelaBody.innerHTML = `<tr><td colspan="3">Nenhuma denúncia encontrada.</td></tr>`;
-    atualizarProgresso();
-    if (user) await atualizarPontosUsuario(user.uid);
+    listaDenuncias.innerHTML = `<p>Nenhuma denúncia encontrada.</p>`;
     return;
   }
+
+  let andamento = "";
+  let aprovado = "";
+  let recusado = "";
 
   querySnapshot.forEach((doc) => {
     const data = doc.data();
     const tipo = data.tipo || "Sem título";
-    const status = data.status || "Em andamento";
+    const descricao = data.descricao || "Sem descrição";
+    const status = (data.status || "pendente").toLowerCase();
     const dataDenuncia = data.data
       ? new Date(data.data.seconds * 1000).toLocaleDateString("pt-BR")
       : "—";
 
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${tipo}</td>
-      <td>${status}</td>
-      <td>${dataDenuncia}</td>
+    const bloco = `
+      <details class="novidades">
+        <summary class="${status}">
+          <img src="./src/img/${
+            status === "aprovado"
+              ? "Aprovado.svg"
+              : status === "em andamento" || status === "andamento"
+              ? "Andamento.svg"
+              : "Negado.svg"
+          }" alt="${status}">
+          ${status.charAt(0).toUpperCase() + status.slice(1)}
+        </summary>
+        <h3>Tipo de reclamação</h3>
+        <p>${tipo}</p>
+        <h3>Informe o que aconteceu</h3>
+        <p>${descricao}</p>
+        <p><strong>Data:</strong> ${dataDenuncia}</p>
+      </details>
     `;
-    tabelaBody.appendChild(tr);
 
-    if (String(status).toLowerCase() === "aprovado") denunciasAprovadas++;
+    if (status === "aprovado") aprovado += bloco;
+    else if (status === "em andamento" || status === "andamento") andamento += bloco;
+    else recusado += bloco;
   });
 
-  atualizarProgresso();
-
-  // 🔹 Atualiza os pontos totais do usuário
-  if (user) await atualizarPontosUsuario(user.uid);
+  listaDenuncias.innerHTML = `
+    ${aprovado || "<p>Nenhuma denúncia aprovada.</p>"}
+    ${andamento || "<p>Nenhuma denúncia em andamento.</p>"}
+    ${recusado || "<p>Nenhuma denúncia recusada.</p>"}
+  `;
 });
+
 
 // =============================
 // 🔹 PROGRESSO E NÍVEIS

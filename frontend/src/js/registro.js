@@ -2,7 +2,8 @@ import { auth, db } from "./config.js";
 import { 
   createUserWithEmailAndPassword, 
   GoogleAuthProvider, 
-  signInWithPopup 
+  signInWithPopup,
+  fetchSignInMethodsForEmail // 🔹 NUEVO
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 import { 
   doc, 
@@ -49,6 +50,16 @@ async function handleRegister(event) {
   }
 
   try {
+    const methods = await fetchSignInMethodsForEmail(auth, email);
+    if (methods.length > 0) {
+      if (methods.includes("google.com")) {
+        showError("email", "Este e-mail já está cadastrado via Google. Faça login com o Google.");
+      } else {
+        showError("email", "Este e-mail já está cadastrado.");
+      }
+      return;
+    }
+
     const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
     const user = userCredential.user;
 
@@ -56,6 +67,7 @@ async function handleRegister(event) {
       nome,
       email,
       pontos: 0,
+      nivelAtual: 0, 
       criadoEm: serverTimestamp()
     });
 
@@ -92,6 +104,7 @@ async function handleGoogleRegister(event) {
         email: user.email,
         foto: user.photoURL || "",
         pontos: 0,
+        nivelAtual: 0, 
         criadoEm: serverTimestamp()
       });
     }

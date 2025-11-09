@@ -3,7 +3,6 @@ import {
   collection,
   addDoc,
   doc,
-  updateDoc,
   serverTimestamp,
   getDoc,
   setDoc
@@ -51,29 +50,20 @@ document.addEventListener("DOMContentLoaded", () => {
           pontos_ganhos: 20
         });
 
-        // 2️⃣ Actualizar puntos totales del usuario
+
+        // Garantir que o usuário exista na coleção "usuarios"
         const userRef = doc(db, "usuarios", user.uid);
         const userSnap = await getDoc(userRef);
 
-        let novosPontos = 20;
-        if (userSnap.exists()) {
-          const pontosAtuais = userSnap.data().pontos || 0;
-          novosPontos = pontosAtuais + 20;
-          await updateDoc(userRef, { pontos: novosPontos });
-        } else {
-          await setDoc(userRef, { pontos: 20, email: user.email });
+        if (!userSnap.exists()) {
+          await setDoc(userRef, {
+            email: user.email,
+            pontos: 0,
+            nivelAtual: 0
+          });
         }
 
-        // 3️⃣ Guardar registro em "pontos_ganhos"
-        await addDoc(collection(db, "pontos_ganhos"), {
-          usuarioId: user.uid,
-          usuarioEmail: user.email,
-          pontos: 20,
-          motivo: "Denúncia registrada",
-          data: serverTimestamp()
-        });
-
-        alert("Reclamação registrada com sucesso! +20 pontos");
+        alert("Reclamação registrada com sucesso! Aguarde aprovação para ganhar pontos.");
 
         // 🔄 Limpeza dos campos e estado
         document.getElementById("modal_reclamacao").value = "";
