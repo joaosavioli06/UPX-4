@@ -1261,7 +1261,7 @@ button.ativo:hover {
     background-color: #00822B;
 }
 
-/* .card_ativo {
+    .card_ativo {
     width: 240px;
     flex-shrink: 0;
     border: 1px solid #FFBE20;
@@ -1537,4 +1537,100 @@ button.ativo:hover {
     color: red;
     font-size: 0.9rem;
     margin-top: 3px;
+}
+
+.estrelas-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.estrela {
+    width: 30px;
+    height: 30px;
+    background: url("../img/Premio-resgatado.svg") no-repeat center center / contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: grayscale(100%) brightness(0.7);
+}
+
+.estrela.desbloqueada {
+    background-image: url("../img/Premio-resgatado.svg");
+    filter: none;
+    transform: scale(1.1);
+}
+
+.modal_recompensas {
+    width: 80%;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    border: none;
+    color: #333;
+}
+
+.barra-container {
+    width: 100%;
+    height: 15px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#barra-progresso {
+    width: 0%;
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.4s ease-in-out;
+}
+
+#estrelas-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.estrela {
+    width: 30px;
+}
+
+.nivel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f5f5f5;
+    width: 100px;
+}
+
+.nivel.desbloqueado {
+    border-color: #4caf50;
+    background-color: #e9f9e9;
+}
+
+.nivel.resgatado {
+    opacity: 0.6;
+    background-color: #d4f8d4;
+}
+
+.btn-resgatar {
+    margin-top: 5px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-resgatar:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }

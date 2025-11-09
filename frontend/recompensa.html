@@ -45,7 +45,7 @@
         </div>
 
         <div class="barra_premios">
-            <div class="icones_premios">
+            <div class="icones_premios" id="estrelas-container">
                 <img src="./src/img/Premio-indisponivel.svg" alt="Prêmio descoberto, mas ainda bloqueado">
                 <img src="./src/img/Icone-surpresa.svg" alt="Estrela em preto e branco, prêmio ainda não desbloqueado">
                 <img src="./src/img/Icone-surpresa.svg" alt="Estrela em preto e branco, prêmio ainda não desbloqueado">
@@ -77,7 +77,9 @@
                 <button type="button" id="abrir-recomp" class="btn_recomp">Ver recompensas</button>
             </article>
 
+            <!-- Modal Recompensas -->
             <dialog id="modal-recomp">
+                <span class="fechar-recomp">&times;</span>
                 <div class="conteudo_recomp">
                     <span class="fechar-recomp">&times;</span>
                     <h2>Próximas recompensas</h2>
@@ -256,9 +258,28 @@
                 <button type="button" id="abrir-solic" class="btn_solic">Acompanhar</button>
             </article>
 
+            <!-- Modal Solicitações -->
             <dialog id="modal-solic" class="modal_solic">
                 <h1>Status de solicitação</h1>
                 <span class="fechar-solic">&times;</span>
+
+                <table id="tabela-denuncias">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Status</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filas de ejemplo (puedes rellenar dinámicamente) -->
+                        <tr>
+                            <td>Buraco na rua</td>
+                            <td>Em andamento</td>
+                            <td>07/11/2025</td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <details class="novidades">
                     <summary class="andamento">
@@ -304,8 +325,9 @@
             </dialog>
         </section>
     </main>
-    <script src="./src/js/script.js"></script>
-    <script src="./src/js/recompensa.js"></script>
+
+    <script type="module" src="./src/js/config.js"></script>
+    <script type="module" src="./src/js/recompensa.js"></script>
     <script type="module" src="./src/js/auth.js"></script>
 </body>
 
