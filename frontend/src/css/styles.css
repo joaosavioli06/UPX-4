@@ -1261,7 +1261,7 @@ button.ativo:hover {
     background-color: #00822B;
 }
 
-    .card_ativo {
+.card_ativo {
     width: 240px;
     flex-shrink: 0;
     border: 1px solid #FFBE20;
@@ -1301,9 +1301,9 @@ button.ativo:hover {
     border-radius: 999px;
     padding: 4px 8px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-} */
+}
 
-.premio {
+*/ .premio {
     position: relative;
     border: none;
     border-radius: 10px;
@@ -1634,3 +1634,4 @@ button.ativo:hover {
     background-color: #ccc;
     cursor: not-allowed;
 }
+

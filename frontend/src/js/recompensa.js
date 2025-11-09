@@ -6,7 +6,7 @@ import { auth, db } from "./config.js";
 import { collection, query, where, getDocs, doc, updateDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
 // =============================
-// 🔹 VARIÁVEIS E ELEMENTOS
+//  VARIÁVEIS E ELEMENTOS
 // =============================
 
 const modalRecomp = document.getElementById("modal-recomp");
@@ -47,7 +47,7 @@ const imgResgatado = "./src/img/Premio-resgatado.svg";
 const imgSupresa = "./src/img/Icone-surpresa.svg";
 
 // =============================
-// 🔹 OBJETO DE PRÊMIOS
+//  OBJETO DE PRÊMIOS
 // =============================
 
 const premios = {
@@ -129,7 +129,7 @@ const premios = {
 };
 
 // =============================
-// 🔹 LISTENER AUTOMÁTICO DE DENÚNCIAS (NOVO BLOCO)
+//  LISTENER AUTOMÁTICO DE DENÚNCIAS 
 // =============================
 
 // Escuta auth y luego onSnapshot para cambios en la colección denuncias del usuario
@@ -171,7 +171,7 @@ if (auth && auth.onAuthStateChanged) {
 }
 
 // =============================
-// 🔹 FIRESTORE: CONTAGEM DE DENÚNCIAS (fallback ao abrir modal)
+// FIRESTORE: CONTAGEM DE DENÚNCIAS (fallback ao abrir modal)
 // =============================
 
 abrirModalSolic?.addEventListener("click", async () => {
@@ -239,7 +239,7 @@ abrirModalSolic?.addEventListener("click", async () => {
 
 
 // =============================
-// 🔹 PROGRESSO E NÍVEIS
+//  PROGRESSO E NÍVEIS
 // =============================
 
 function atualizarProgresso() {
@@ -251,7 +251,7 @@ function atualizarProgresso() {
 }
 
 // ===============================
-// 🔹 FUNÇÃO: recalcular pontos do usuário a partir das denúncias aprovadas
+//  FUNÇÃO: recalcular pontos do usuário a partir das denúncias aprovadas
 // ===============================
 async function atualizarPontosUsuario(userId) {
   try {
@@ -293,7 +293,7 @@ async function atualizarPontosUsuario(userId) {
 }
 
 // ===============================
-// 🔹 MOSTRAR NÍVEL ATUAL NA TELA
+//  MOSTRAR NÍVEL ATUAL NA TELA
 // ===============================
 function mostrarNivelAtual(nivel) {
   const el = document.getElementById("nivel-atual");
@@ -347,7 +347,7 @@ function atualizarNiveis() {
 }
 
 // =============================
-// 🔹 CARROSSEL (versão original restaurada)
+//  CARROSSEL 
 // =============================
 
 let posicaoCarrossel = 0;
@@ -371,16 +371,15 @@ document.querySelector(".btn_avancar").addEventListener("click", avancarCarrosse
 document.querySelector(".btn_voltar").addEventListener("click", voltarCarrossel);
 
 // =============================
-// 🔹 EVENTOS PARA BOTÕES DE CADA CARD (abrir modal premio)
+// 🔹 EVENTOS PARA BOTÕES DE CADA CARD 
 // =============================
 
-// Mantengo la lógica original pero enlazo para mostrar el modalPremio con el contenido correcto
 botoesPremio.forEach((botao, index) => {
   botao.addEventListener("click", () => {
     if (botao.classList.contains("ativo")) {
       const nivel = index + 1;
 
-      // cerrar modalRecomp (si estaba abierto) y abrir modalPremio con el premio correcto
+      // fechar  modalRecomp e abrir modalPremio 
       if (modalRecomp && modalRecomp.open) modalRecomp.close();
 
       atualizarConteudoPremio(nivel);
@@ -392,7 +391,7 @@ botoesPremio.forEach((botao, index) => {
 });
 
 // =============================
-// 🔹 Função para preencher contenido modal premio
+//  Função para preencher contenido modal premio
 // =============================
 function atualizarConteudoPremio(nivel) {
   const premio = premios[nivel];
@@ -406,7 +405,7 @@ function atualizarConteudoPremio(nivel) {
 }
 
 // =============================
-// 🔹 Resgatar premio: cierra el modal de premio y actualiza iconos visuales
+// Resgatar premio: cierra el modal de premio y actualiza iconos visuales
 // =============================
 function resgatarPremio() {
   if (premioResgatado) return;
@@ -427,7 +426,7 @@ function resgatarPremio() {
     console.log("🏆 Prêmio resgatado — modal fechado automaticamente.");
   }
 
-  // Mantener comportamiento visual original: animar y cerrar modalRecomp si hace falta
+  // Manter o comportamento visual original: animar e fechar o modal de recompensas se necessário
   if (modalRecomp) {
     modalRecomp.classList.add("fadeOut");
     setTimeout(() => {
@@ -438,14 +437,14 @@ function resgatarPremio() {
 
   premioResgatado = true;
 
-  // Reset flags después de pequeña pausa (según lógica original)
+  // Reset flags depois de pausar
   setTimeout(() => {
     premioDesbloqueado = false;
     premioResgatado = false;
   }, 500);
 }
 
-// Enlazo el botón resgatar si existe
+//Vinculo o botão de resgatar, se ele existir
 if (btnResgatar) {
   btnResgatar.addEventListener("click", resgatarPremio);
 }
@@ -466,7 +465,7 @@ configurarModal(modalRecomp, abrirModalRecomp, fecharModalRecompElements[0]);
 configurarModal(modalPremio, abrirModalPremio, fecharModalPremio);
 configurarModal(modalSolic, abrirModalSolic, fecharModalSolic);
 
-// AÑADO: si hay más de un elemento .fechar-recomp (hay dos spans en tu HTML), cerrarlos todos
+// ADICIONO: se houver mais de um elemento .fechar-recomp (existem dois spans no seu HTML), fechar todos
 if (fecharModalRecompElements && fecharModalRecompElements.length > 0) {
   Array.from(fecharModalRecompElements).forEach((el) => {
     el.addEventListener("click", () => {
@@ -487,7 +486,7 @@ if (abrirModalRecomp) {
 }
 
 // =============================
-// 🔹 Pequeña seguridad: si el modal premio tiene su 'X' (fecharModalPremio) lo enlazo y lo dejo como antes
+//  Também garanto que o botão 'abrir-recomp' atualize o progresso antes de abrir (mantendo a experiência do usuário)
 // =============================
 if (fecharModalPremio) {
   fecharModalPremio.addEventListener("click", () => {
@@ -499,6 +498,6 @@ if (fecharModalPremio) {
 }
 
 // =============================
-// 🔹 Final - log para debugging
+//  Final - log para debugging
 // =============================
 console.log("✅ recompensa.js inicializado - listeners prontos.");
