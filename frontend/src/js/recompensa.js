@@ -11,7 +11,7 @@ import { collection, query, where, getDocs, doc, updateDoc, setDoc, onSnapshot }
 
 const modalRecomp = document.getElementById("modal-recomp");
 const abrirModalRecomp = document.getElementById("abrir-recomp");
-const fecharModalRecompElements = document.getElementsByClassName("fechar-recomp"); // NodeList-like
+const fecharModalRecompElements = document.getElementsByClassName("fechar-recomp");
 
 const carrossel = document.getElementById("carrossel");
 const cards = document.querySelectorAll(".card");
@@ -34,9 +34,7 @@ const extraPremio = document.querySelector(".extra");
 const modalSolic = document.getElementById("modal-solic");
 const abrirModalSolic = document.getElementById("abrir-solic");
 const fecharModalSolic = document.getElementsByClassName("fechar-solic")[0];
-const tabelaBody = document.querySelector("#tabela-denuncias tbody");
 
-let indice = 0;
 let denunciasAprovadas = 0;
 let nivelAtual = 0;
 let premioDesbloqueado = false;
@@ -129,49 +127,7 @@ const premios = {
 };
 
 // =============================
-//  LISTENER AUTOMÁTICO DE DENÚNCIAS 
-// =============================
-
-// Escuta auth y luego onSnapshot para cambios en la colección denuncias del usuario
-if (auth && auth.onAuthStateChanged) {
-  auth.onAuthStateChanged((user) => {
-    if (!user) return;
-
-    const denunciasRef = collection(db, "denuncias");
-    const q = query(denunciasRef, where("usuarioId", "==", user.uid));
-
-    onSnapshot(q, async (snapshot) => {
-      denunciasAprovadas = 0;
-      tabelaBody.innerHTML = "";
-
-      snapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        const tipo = data.tipo || "Sem título";
-        const status = data.status || "Em andamento";
-        const dataDenuncia = data.data
-          ? new Date(data.data.seconds * 1000).toLocaleDateString("pt-BR")
-          : "—";
-
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${tipo}</td>
-          <td>${status}</td>
-          <td>${dataDenuncia}</td>
-        `;
-        tabelaBody.appendChild(tr);
-
-        if (String(status).toLowerCase() === "aprovado") denunciasAprovadas++;
-      });
-
-      // Atualiza progresso e pontos automáticamente
-      atualizarProgresso();
-      await atualizarPontosUsuario(user.uid);
-    });
-  });
-}
-
-// =============================
-// FIRESTORE: CONTAGEM DE DENÚNCIAS (fallback ao abrir modal)
+//  MODAL DE SOLICITAÇÕES
 // =============================
 
 abrirModalSolic?.addEventListener("click", async () => {
@@ -187,14 +143,10 @@ abrirModalSolic?.addEventListener("click", async () => {
   const q = query(denunciasRef, where("usuarioId", "==", user.uid));
   const querySnapshot = await getDocs(q);
 
-  if (querySnapshot.empty) {
-    listaDenuncias.innerHTML = `<p>Nenhuma denúncia encontrada.</p>`;
-    return;
-  }
-
-  let andamento = "";
-  let aprovado = "";
-  let recusado = "";
+  // Inicializa arrays para cada tipo
+  let andamento = [];
+  let aprovado = [];
+  let recusado = [];
 
   querySnapshot.forEach((doc) => {
     const data = doc.data();
@@ -206,34 +158,45 @@ abrirModalSolic?.addEventListener("click", async () => {
       : "—";
 
     const bloco = `
-      <details class="novidades">
-        <summary class="${status}">
-          <img src="./src/img/${
-            status === "aprovado"
-              ? "Aprovado.svg"
-              : status === "em andamento" || status === "andamento"
-              ? "Andamento.svg"
-              : "Negado.svg"
-          }" alt="${status}">
-          ${status.charAt(0).toUpperCase() + status.slice(1)}
-        </summary>
+      <div class="item-solicitacao">
         <h3>Tipo de reclamação</h3>
         <p>${tipo}</p>
         <h3>Informe o que aconteceu</h3>
         <p>${descricao}</p>
         <p><strong>Data:</strong> ${dataDenuncia}</p>
-      </details>
+      </div>
     `;
 
-    if (status === "aprovado") aprovado += bloco;
-    else if (status === "em andamento" || status === "andamento") andamento += bloco;
-    else recusado += bloco;
+    if (status === "aprovado") aprovado.push(bloco);
+    else if (status === "em andamento" || status === "pendente") andamento.push(bloco);
+    else if (status === "recusado") recusado.push(bloco);
   });
 
+  // Inserta los tres <details> siempre
   listaDenuncias.innerHTML = `
-    ${aprovado || "<p>Nenhuma denúncia aprovada.</p>"}
-    ${andamento || "<p>Nenhuma denúncia em andamento.</p>"}
-    ${recusado || "<p>Nenhuma denúncia recusada.</p>"}
+    <details class="novidades">
+      <summary class="andamento">
+        <img src="./src/img/Andamento.svg" alt="Relógio">
+        Em andamento
+      </summary>
+      ${andamento.length > 0 ? andamento.join("") : "<p>Nenhuma denúncia em andamento.</p>"}
+    </details>
+
+    <details class="novidades">
+      <summary class="aprovado">
+        <img src="./src/img/Aprovado.svg" alt="Verificado aprovado">
+        Aprovado
+      </summary>
+      ${aprovado.length > 0 ? aprovado.join("") : "<p>Nenhuma denúncia aprovada.</p>"}
+    </details>
+
+    <details class="novidades">
+      <summary class="recusado">
+        <img src="./src/img/Negado.svg" alt="Verificado negado">
+        Recusado
+      </summary>
+      ${recusado.length > 0 ? recusado.join("") : "<p>Nenhuma denúncia recusada.</p>"}
+    </details>
   `;
 });
 
@@ -371,7 +334,7 @@ document.querySelector(".btn_avancar").addEventListener("click", avancarCarrosse
 document.querySelector(".btn_voltar").addEventListener("click", voltarCarrossel);
 
 // =============================
-// 🔹 EVENTOS PARA BOTÕES DE CADA CARD 
+//  EVENTOS PARA BOTÕES DE CADA CARD 
 // =============================
 
 botoesPremio.forEach((botao, index) => {
@@ -405,7 +368,7 @@ function atualizarConteudoPremio(nivel) {
 }
 
 // =============================
-// Resgatar premio: cierra el modal de premio y actualiza iconos visuales
+// Resgatar prêmio: fecha o modal de prêmio e atualiza os ícones visuais
 // =============================
 function resgatarPremio() {
   if (premioResgatado) return;
@@ -450,7 +413,7 @@ if (btnResgatar) {
 }
 
 // =============================
-// 🔹 MODAIS: funcionalidad de abrir/cerrar (manteniendo original)
+//  MODAIS: funcionalidade de abrir/fechar 
 // =============================
 
 function configurarModal(modal, abrir, fechar) {
@@ -477,7 +440,7 @@ if (fecharModalRecompElements && fecharModalRecompElements.length > 0) {
   });
 }
 
-// También aseguro que el botón 'abrir-recomp' actualice progreso antes de abrir (manteniendo UX)
+// botão 'abrir-recomp' atualize o progresso antes de abrir (mantendo a UX).
 if (abrirModalRecomp) {
   abrirModalRecomp.addEventListener("click", () => {
     atualizarProgresso();

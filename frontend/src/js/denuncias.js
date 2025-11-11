@@ -31,14 +31,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // 🚫 Evita múltiplos cliques rápidos
+      // Evita múltiplos cliques rápidos
       if (btnRegistrar.disabled) return;
       btnRegistrar.disabled = true;
       const textoOriginal = btnRegistrar.textContent;
       btnRegistrar.textContent = "Enviando...";
 
       try {
-        // 1️⃣ Guardar la denuncia
+        // 1️ Guarda a denuncia
         await addDoc(collection(db, "denuncias"), {
           tipo,
           descricao,
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         alert("Reclamação registrada com sucesso! Aguarde aprovação para ganhar pontos.");
 
-        // 🔄 Limpeza dos campos e estado
+        // Limpeza dos campos e estado
         document.getElementById("modal_reclamacao").value = "";
         document.getElementById("modal_ocorrido").value = "";
         localStorage.removeItem("latitude");
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Erro ao salvar denúncia:", erro);
         alert("Erro ao salvar. Tente novamente.");
       } finally {
-        // ✅ Reativa o botão depois de concluir
+        // Reativa o botão depois de concluir
         btnRegistrar.disabled = false;
         btnRegistrar.textContent = textoOriginal;
       }

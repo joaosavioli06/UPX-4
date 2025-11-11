@@ -1635,3 +1635,51 @@ button.ativo:hover {
     cursor: not-allowed;
 }
 
+.item-solicitacao {
+  border: 1px solid #dfe3e6;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+details[open] summary {
+  color: #2e7d32;
+}
+
+summary.andamento,
+summary.aprovado,
+summary.recusado {
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; 
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+summary.andamento {
+  background-color: #fff7e6;
+  color: #9c6b00;
+}
+
+summary.aprovado {
+  background-color: #e7f7ed;
+  color: #087f23;
+  border: 1px solid #087f23;
+}
+
+summary.recusado {
+  background-color: #fdecea;
+  color: #b71c1c;
+}

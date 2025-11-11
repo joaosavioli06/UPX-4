@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
         }
 
-        // Eventos de tecla Enter
+        // Eventos da tecla Enter
         document.getElementById("cep")?.addEventListener("keypress", e => {
             if (e.key === "Enter") {
                 e.preventDefault();
@@ -162,12 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const lat = localStorage.getItem("latitude");
             const lng = localStorage.getItem("longitude");
 
-            // Validación
+            // validação
             if (!tipo) { alert("Por favor, selecione o tipo de reclamação."); return; }
             if (!descricao) { alert("Por favor, descreva o ocorrido."); return; }
             if (!lat || !lng) { alert("Por favor, clique em um ponto no mapa para selecionar a localização."); return; }
 
-            // Copiar valores al modal
+            // Copiar valores ao modal
             document.getElementById("modal_reclamacao").value = tipo;
             document.getElementById("modal_ocorrido").value = descricao;
 

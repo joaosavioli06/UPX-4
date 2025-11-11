@@ -263,65 +263,10 @@
                 <h1>Status de solicitação</h1>
                 <span class="fechar-solic">&times;</span>
 
-                <table id="tabela-denuncias">
-                    <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Status</th>
-                            <th>Data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr>
-                            <td>Buraco na rua</td>
-                            <td>Em andamento</td>
-                            <td>07/11/2025</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <details class="novidades">
-                    <summary class="andamento">
-                        <img src="./src/img/Andamento.svg" alt="Relógio">
-                        Em andamento
-                    </summary>
-                    <h3>Tipo de reclamação</h3>
-                    <p>Buraco na rua</p>
-
-                    <h3>Informe o que aconteceu</h3>
-                    <p>Há um buraco no asfalto na **********, próximo ao número ***. A situação dificulta o tráfego de
-                        veículos e coloca pedestres e motoristas em risco, especialmente à noite ou em dias de chuva.
-                    </p>
-                </details>
-
-                <details class="novidades">
-                    <summary class="aprovado">
-                        <img src="./src/img/Aprovado.svg" alt="Verificado aprovado">
-                        Aprovado
-                    </summary>
-                    <h3>Tipo de reclamação</h3>
-                    <p>Buraco na rua</p>
-
-                    <h3>Informe o que aconteceu</h3>
-                    <p>Há um buraco no asfalto na **********, próximo ao número ***. A situação dificulta o tráfego de
-                        veículos e coloca pedestres e motoristas em risco, especialmente à noite ou em dias de chuva.
-                    </p>
-                </details>
-
-                <details class="novidades">
-                    <summary class="recusado">
-                        <img src="./src/img/Negado.svg" alt="Verificado negado">
-                        Recusado
-                    </summary>
-                    <h3>Tipo de reclamação</h3>
-                    <p>Buraco na rua</p>
-
-                    <h3>Informe o que aconteceu</h3>
-                    <p>Há um buraco no asfalto na **********, próximo ao número ***. A situação dificulta o tráfego de
-                        veículos e coloca pedestres e motoristas em risco, especialmente à noite ou em dias de chuva.
-                    </p>
-                </details>
+                <!-- Aquí el JS inserta automáticamente los <details> -->
+                <div id="lista-denuncias">
+                    <p>Carregando denúncias...</p>
+                </div>
             </dialog>
         </section>
     </main>
