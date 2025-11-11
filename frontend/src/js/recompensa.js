@@ -44,6 +44,33 @@ const imgIndisponivel = "./src/img/Premio-indisponivel.svg";
 const imgResgatado = "./src/img/Premio-resgatado.svg";
 const imgSupresa = "./src/img/Icone-surpresa.svg";
 
+
+if (auth && auth.onAuthStateChanged) {
+  auth.onAuthStateChanged((user) => {
+    if (!user) return;
+
+    const denunciasRef = collection(db, "denuncias");
+    const q = query(denunciasRef, where("usuarioId", "==", user.uid));
+
+    // Escuta em tempo real as denúncias do usuário
+    onSnapshot(q, (snapshot) => {
+      denunciasAprovadas = 0; // reinicia o contador
+
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        const status = (data.status || "").toLowerCase();
+
+        if (status === "aprovado") {
+          denunciasAprovadas++;
+        }
+      });
+
+      // Atualiza o progresso e as estrelas automaticamente
+      atualizarProgresso();
+    });
+  });
+}
+
 // =============================
 //  OBJETO DE PRÊMIOS
 // =============================
@@ -147,6 +174,7 @@ abrirModalSolic?.addEventListener("click", async () => {
   let andamento = [];
   let aprovado = [];
   let recusado = [];
+  denunciasAprovadas = 0; 
 
   querySnapshot.forEach((doc) => {
     const data = doc.data();
@@ -167,12 +195,16 @@ abrirModalSolic?.addEventListener("click", async () => {
       </div>
     `;
 
-    if (status === "aprovado") aprovado.push(bloco);
-    else if (status === "em andamento" || status === "pendente") andamento.push(bloco);
-    else if (status === "recusado") recusado.push(bloco);
+    if (status === "aprovado") {
+      aprovado.push(bloco);
+      denunciasAprovadas++; 
+    } else if (status === "em andamento" || status === "pendente") {
+      andamento.push(bloco);
+    } else if (status === "recusado") {
+      recusado.push(bloco);
+    }
   });
 
-  // Inserta los tres <details> siempre
   listaDenuncias.innerHTML = `
     <details class="novidades">
       <summary class="andamento">
@@ -198,6 +230,8 @@ abrirModalSolic?.addEventListener("click", async () => {
       ${recusado.length > 0 ? recusado.join("") : "<p>Nenhuma denúncia recusada.</p>"}
     </details>
   `;
+
+  atualizarProgresso();
 });
 
 
