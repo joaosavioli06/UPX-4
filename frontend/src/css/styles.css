@@ -59,7 +59,7 @@
 .acoes {
     display: flex;
     list-style: none;
-    gap: 34px;
+    gap: 14px;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -90,6 +90,7 @@
 }
 
 .botao_login {
+    width: 77px;
     color: #015E20;
     background-color: #F5F7FA;
     text-decoration: none;
@@ -924,20 +925,13 @@ option[value=""] {
     display: flex;
     flex-direction: column;
     font-family: "Inter", sans-serif;
-    margin-top: 32px;
+    /* margin-top: 32px; */
 }
 
-#enviar {
-    width: 320px;
-    height: 40px;
-    margin-top: 16px;
-    background-color: #015E20;
-    color: #FFFFFF;
-    border-radius: 6px;
+.caixa_modal p {
+    margin-top: 11px;
     font-size: 14px;
-    font-weight: 500;
-    border: none;
-    margin-left: auto;
+    color: #717171;
 }
 
 .fechar-modal,
@@ -1303,7 +1297,7 @@ button.ativo:hover {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-*/ .premio {
+.premio {
     position: relative;
     border: none;
     border-radius: 10px;
@@ -1539,13 +1533,6 @@ button.ativo:hover {
     margin-top: 3px;
 }
 
-.estrelas-container {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 15px;
-}
-
 .estrela {
     width: 30px;
     height: 30px;
@@ -1586,38 +1573,30 @@ button.ativo:hover {
     transition: width 0.4s ease-in-out;
 }
 
-#estrelas-container {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.estrela {
-    width: 30px;
-}
 
 .nivel {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    border: 2px solid #ccc;
-    border-radius: 12px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #f5f5f5;
-    width: 100px;
+    justify-content: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 10px;
+    background-color: #f2f2f2;
+    color: #0D0D0D;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 999px;
+    padding: 4px 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d9d9d9;
 }
 
-.nivel.desbloqueado {
-    border-color: #4caf50;
-    background-color: #e9f9e9;
+.nivel.ativo {
+    background-color: #FFBE20;
 }
 
-.nivel.resgatado {
-    opacity: 0.6;
-    background-color: #d4f8d4;
-}
 
 .btn-resgatar {
     margin-top: 5px;
@@ -1643,24 +1622,11 @@ button.ativo:hover {
   background-color: #f9f9f9;
 }
 
-details summary {
-  cursor: pointer;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 0;
-}
-
-details[open] summary {
-  color: #2e7d32;
-}
-
 summary.andamento,
 summary.aprovado,
 summary.recusado {
   white-space: nowrap;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px; 
   font-weight: 600;
@@ -1676,7 +1642,6 @@ summary.andamento {
 summary.aprovado {
   background-color: #e7f7ed;
   color: #087f23;
-  border: 1px solid #087f23;
 }
 
 summary.recusado {

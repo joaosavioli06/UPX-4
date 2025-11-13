@@ -15,6 +15,8 @@ const fecharModalRecompElements = document.getElementsByClassName("fechar-recomp
 
 const carrossel = document.getElementById("carrossel");
 const cards = document.querySelectorAll(".card");
+const btnAvancar = document.querySelector(".btn_avancar");
+const btnVoltar = document.querySelector(".btn_voltar");
 const botoesPremio = document.querySelectorAll(".card button");
 
 const progresso = document.querySelector(".progresso");
@@ -39,6 +41,7 @@ let denunciasAprovadas = 0;
 let nivelAtual = 0;
 let premioDesbloqueado = false;
 let premioResgatado = false;
+let premiosJaResgatados = [];
 
 const imgIndisponivel = "./src/img/Premio-indisponivel.svg";
 const imgResgatado = "./src/img/Premio-resgatado.svg";
@@ -54,7 +57,7 @@ if (auth && auth.onAuthStateChanged) {
 
     // Escuta em tempo real as denúncias do usuário
     onSnapshot(q, (snapshot) => {
-      denunciasAprovadas = 0; // reinicia o contador
+      denunciasAprovadas = 0;
 
       snapshot.forEach((docSnap) => {
         const data = docSnap.data();
@@ -65,7 +68,6 @@ if (auth && auth.onAuthStateChanged) {
         }
       });
 
-      // Atualiza o progresso e as estrelas automaticamente
       atualizarProgresso();
     });
   });
@@ -160,8 +162,9 @@ const premios = {
 abrirModalSolic?.addEventListener("click", async () => {
   modalSolic.showModal();
 
-  const listaDenuncias = document.getElementById("lista-denuncias");
-  listaDenuncias.innerHTML = "<p>Carregando denúncias...</p>";
+  const secaoAndamento = document.querySelector(".novidades .andamento")?.parentElement;
+  const secaoAprovado = document.querySelector(".novidades .aprovado")?.parentElement;
+  const secaoRecusado = document.querySelector(".novidades .recusado")?.parentElement;
 
   const user = auth.currentUser;
   if (!user) return;
@@ -170,11 +173,10 @@ abrirModalSolic?.addEventListener("click", async () => {
   const q = query(denunciasRef, where("usuarioId", "==", user.uid));
   const querySnapshot = await getDocs(q);
 
-  // Inicializa arrays para cada tipo
   let andamento = [];
   let aprovado = [];
   let recusado = [];
-  denunciasAprovadas = 0; 
+  denunciasAprovadas = 0;
 
   querySnapshot.forEach((doc) => {
     const data = doc.data();
@@ -197,7 +199,7 @@ abrirModalSolic?.addEventListener("click", async () => {
 
     if (status === "aprovado") {
       aprovado.push(bloco);
-      denunciasAprovadas++; 
+      denunciasAprovadas++;
     } else if (status === "em andamento" || status === "pendente") {
       andamento.push(bloco);
     } else if (status === "recusado") {
@@ -205,31 +207,23 @@ abrirModalSolic?.addEventListener("click", async () => {
     }
   });
 
-  listaDenuncias.innerHTML = `
-    <details class="novidades">
-      <summary class="andamento">
-        <img src="./src/img/Andamento.svg" alt="Relógio">
-        Em andamento
-      </summary>
-      ${andamento.length > 0 ? andamento.join("") : "<p>Nenhuma denúncia em andamento.</p>"}
-    </details>
+  const inserirConteudo = (secao, conteudo, msgVazio) => {
+    if (!secao) return;
+    secao.querySelectorAll(".item-solicitacao, p").forEach((el) => el.remove());
+    secao.innerHTML += conteudo.length > 0 ? conteudo.join("") : `<p>${msgVazio}</p>`;
+  };
 
-    <details class="novidades">
-      <summary class="aprovado">
-        <img src="./src/img/Aprovado.svg" alt="Verificado aprovado">
-        Aprovado
-      </summary>
-      ${aprovado.length > 0 ? aprovado.join("") : "<p>Nenhuma denúncia aprovada.</p>"}
-    </details>
+  secaoAndamento?.addEventListener("toggle", () => {
+    if (secaoAndamento.open) inserirConteudo(secaoAndamento, andamento, "Nenhuma denúncia em andamento.");
+  });
 
-    <details class="novidades">
-      <summary class="recusado">
-        <img src="./src/img/Negado.svg" alt="Verificado negado">
-        Recusado
-      </summary>
-      ${recusado.length > 0 ? recusado.join("") : "<p>Nenhuma denúncia recusada.</p>"}
-    </details>
-  `;
+  secaoAprovado?.addEventListener("toggle", () => {
+    if (secaoAprovado.open) inserirConteudo(secaoAprovado, aprovado, "Nenhuma denúncia aprovada.");
+  });
+
+  secaoRecusado?.addEventListener("toggle", () => {
+    if (secaoRecusado.open) inserirConteudo(secaoRecusado, recusado, "Nenhuma denúncia recusada.");
+  });
 
   atualizarProgresso();
 });
@@ -240,11 +234,23 @@ abrirModalSolic?.addEventListener("click", async () => {
 // =============================
 
 function atualizarProgresso() {
-  const progressoAtual = Math.min(denunciasAprovadas / 50, 1) * 100;
+  const totalPremios = 10;
+  const denunciasPorPremio = 5;
+  const novoNivel = Math.min(Math.floor(denunciasAprovadas / denunciasPorPremio), totalPremios);
+
+  // Atualiza apenas se houve mudança
+  if (novoNivel !== nivelAtual) {
+    nivelAtual = novoNivel;
+  }
+
+  // Calcula a porcentagem da barra
+  const progressoAtual = Math.min((nivelAtual / totalPremios) * 100, 100);
   progresso.style.width = `${progressoAtual}%`;
-  textoProgresso.textContent = `${denunciasAprovadas} denúncias aprovadas`;
-  atualizarIcones(progressoAtual);
-  atualizarNiveis();
+  textoProgresso.textContent = `${nivelAtual} de ${totalPremios} missões concluídas`;
+
+  // Atualiza ícones e cards
+  atualizarIcones();
+  atualizarCards();
 }
 
 // ===============================
@@ -292,80 +298,176 @@ async function atualizarPontosUsuario(userId) {
 // ===============================
 //  MOSTRAR NÍVEL ATUAL NA TELA
 // ===============================
-function mostrarNivelAtual(nivel) {
-  const el = document.getElementById("nivel-atual");
-  if (!el) return;
-  const nivelMax = 10;
-  el.textContent = `Nível atual: ${nivel} de ${nivelMax}`;
-}
+// function mostrarNivelAtual(nivel) {
+//   const el = document.getElementById("nivel-atual");
+//   if (!el) return;
+//   const nivelMax = 10;
+//   el.textContent = `Nível atual: ${nivel} de ${nivelMax}`;
+// }
 
 // Atualiza as estrelas acima da barra
-function atualizarIcones(valor) {
-  const estrelasDesbloqueadas = Math.floor(denunciasAprovadas / 5);
+function atualizarIcones() { 
+  const totalPremios = 10; 
+  const premiosDesbloqueados = Math.min(nivelAtual, totalPremios); 
 
-  icones.forEach((icone, i) => {
-    if (i < estrelasDesbloqueadas) {
-      icone.src = imgResgatado;
-      icone.alt = "Prêmio desbloqueado";
-    } else {
-      icone.src = imgSupresa;
-      icone.alt = "Prêmio ainda bloqueado";
-    }
+  icones.forEach((icone, i) => { 
+    if (premiosJaResgatados.includes(i)) { 
+      // Se já foi resgatado anteriormente
+      icone.src = imgResgatado; 
+      icone.alt = "Prêmio resgatado com sucesso"; 
+    } else if (i === premiosDesbloqueados - 1) { 
+      // O prêmio atual, disponível para resgate
+      icone.src = imgIndisponivel; 
+      icone.alt = "Prêmio desbloqueado, pronto para resgate"; 
+    } else if (i < premiosDesbloqueados - 1) { 
+      // Prêmios anteriores já resgatados
+      icone.src = imgResgatado; 
+      icone.alt = "Prêmio resgatado com sucesso"; 
+    } else { 
+      // Ainda não desbloqueado
+      icone.src = imgSupresa; 
+      icone.alt = "Prêmio ainda não desbloqueado"; 
+    } 
   });
 }
 
-// Desbloqueia visualmente os cards no carrossel
-function atualizarNiveis() {
-  const estrelasDesbloqueadas = Math.floor(denunciasAprovadas / 5);
 
+function atualizarCards() {
   for (let i = 1; i <= 10; i++) {
     const card = document.getElementById(`nivel${i}`);
     if (!card) continue;
 
-    const icone = card.querySelector(".nivel img");
+    const img = card.querySelector(".nivel img");
     const botao = card.querySelector("button");
+    const spanNivel = card.querySelector(".nivel");
 
-    if (i <= estrelasDesbloqueadas) {
-      icone.src = "./src/img/Desbloqueado.svg";
-      icone.alt = "Nível desbloqueado";
-      botao.textContent = "Resgatar prêmio";
+    if (i <= nivelAtual) {
+      // Prêmio disponível para resgate
+      img.src = "./src/img/Desbloqueado.svg";
+      img.alt = "Cadeado aberto";
+      botao.textContent = "Prêmio disponível";
       botao.disabled = false;
       botao.classList.remove("indisponivel");
       botao.classList.add("ativo");
+      card.classList.add("ativo");
+      spanNivel.classList.add("ativo");
     } else {
-      icone.src = "./src/img/Bloqueado.svg";
-      icone.alt = "Nível bloqueado";
+      // Ainda bloqueado
+      img.src = "./src/img/Bloqueado.svg";
+      img.alt = "Cadeado fechado";
       botao.textContent = "Prêmio indisponível";
       botao.disabled = true;
       botao.classList.remove("ativo");
       botao.classList.add("indisponivel");
+      card.classList.remove("ativo");
+      spanNivel.classList.remove("ativo");
     }
   }
 }
+
+// Desbloqueia visualmente os cards no carrossel
+function desbloquearRecompensa(nivel) {
+  const card = document.getElementById(`nivel${nivel}`);
+  if (card) {
+    const img = card.querySelector(".nivel img");
+    const botao = card.querySelector("button");
+    const spanNivel = card.querySelector(".nivel");
+
+    // Ícone colorido e card ativo
+    img.src = "./src/img/Desbloqueado.svg";
+    img.alt = "Cadeado aberto";
+
+    botao.textContent = "Prêmio disponível";
+    botao.classList.remove("indisponivel");
+    botao.classList.add("ativo");
+    card.classList.add("ativo");
+    spanNivel.classList.add("ativo");
+  }
+}
+
+// Abrir modal apenas se o botão estiver ativo
+abrirModalPremio.addEventListener("click", () => {
+  if (!abrirModalPremio.classList.contains("indisponivel")) {
+    atualizarConteudoPremio(nivelAtual);
+    modalPremio.showModal();
+  }
+});
+
+// Fechar modal
+fecharModalPremio.addEventListener("click", () => modalPremio.close());
+
+// Resgatar prêmio
+btnResgatar.addEventListener("click", () => {
+  if (!premioResgatado) {
+    const indice = nivelAtual - 1;
+
+    // Atualiza o ícone para "resgatado"
+    icones[indice].src = imgResgatado;
+    icones[indice].alt = "Prêmio resgatado com sucesso";
+
+    // Mantém o card atual como ativo (não volta a ficar preto e branco)
+    const cardAtual = document.getElementById(`nivel${nivelAtual}`);
+    if (cardAtual) {
+      cardAtual.classList.add("ativo");
+      const botao = cardAtual.querySelector("button");
+      botao.textContent = "Prêmio resgatado";
+      botao.disabled = true;
+      botao.classList.remove("ativo");
+      botao.classList.add("resgatado"); // opcional, caso tenha estilo próprio
+    }
+
+    // Atualiza o próximo card para desbloqueado
+    if (icones[indice + 1]) {
+      desbloquearRecompensa(nivelAtual + 1);
+    }
+
+    // Impede resgate duplo e fecha modal
+    premioResgatado = true;
+    modalPremio.close();
+
+    // Reseta flags após meio segundo
+    setTimeout(() => {
+      premioResgatado = false;
+    }, 500);
+  }
+});
 
 // =============================
 //  CARROSSEL 
 // =============================
 
-let posicaoCarrossel = 0;
 
-function avancarCarrossel() {
-  const cards = carrossel.querySelectorAll(".card");
-  if (posicaoCarrossel < cards.length - 1) {
-    posicaoCarrossel++;
-    carrossel.style.transform = `translateX(-${posicaoCarrossel * 100}%)`;
+let indice = 0;
+
+btnAvancar.addEventListener("click", () => {
+  const cardWidth = cards[0].offsetWidth + 16; // espaçamento entre os cards
+  const wrapperWidth = document.querySelector(".carrossel-wrapper").offsetWidth;
+  const totalWidth = carrossel.scrollWidth;
+  const maxTranslate = totalWidth - wrapperWidth;
+  const translateX = (indice + 1) * cardWidth;
+
+  // só avança se ainda não chegou ao fim
+  if (translateX <= maxTranslate) {
+    indice++;
+    carrossel.style.transform = `translateX(-${indice * cardWidth}px)`;
+  } else {
+    // fixa no último card
+    carrossel.style.transform = `translateX(-${maxTranslate}px)`;
   }
-}
+});
 
-function voltarCarrossel() {
-  if (posicaoCarrossel > 0) {
-    posicaoCarrossel--;
-    carrossel.style.transform = `translateX(-${posicaoCarrossel * 100}%)`;
+btnVoltar.addEventListener("click", () => {
+  const cardWidth = cards[0].offsetWidth + 16;
+
+  // só volta se não estiver no primeiro
+  if (indice > 0) {
+    indice--;
+    carrossel.style.transform = `translateX(-${indice * cardWidth}px)`;
+  } else {
+    indice = 0;
+    carrossel.style.transform = `translateX(0px)`;
   }
-}
-
-document.querySelector(".btn_avancar").addEventListener("click", avancarCarrossel);
-document.querySelector(".btn_voltar").addEventListener("click", voltarCarrossel);
+});
 
 // =============================
 //  EVENTOS PARA BOTÕES DE CADA CARD 
@@ -376,7 +478,6 @@ botoesPremio.forEach((botao, index) => {
     if (botao.classList.contains("ativo")) {
       const nivel = index + 1;
 
-      // fechar  modalRecomp e abrir modalPremio 
       if (modalRecomp && modalRecomp.open) modalRecomp.close();
 
       atualizarConteudoPremio(nivel);
@@ -387,9 +488,6 @@ botoesPremio.forEach((botao, index) => {
   });
 });
 
-// =============================
-//  Função para preencher contenido modal premio
-// =============================
 function atualizarConteudoPremio(nivel) {
   const premio = premios[nivel];
   if (!premio) return;
@@ -413,33 +511,39 @@ function resgatarPremio() {
     icones[idx].alt = "Prêmio resgatado com sucesso";
   }
 
-  if (icones[idx + 1]) {
-    icones[idx + 1].src = imgIndisponivel;
-    icones[idx + 1].alt = "Próximo prêmio ainda indisponível";
+  const cardAtual = document.getElementById(`nivel${nivelAtual}`);
+  if (cardAtual) {
+    cardAtual.classList.add("ativo");
+    const botao = cardAtual.querySelector("button");
+    botao.textContent = "Prêmio resgatado";
+    botao.disabled = true;
+    botao.classList.remove("ativo");
+    botao.classList.add("resgatado");
   }
 
-  if (modalPremio && modalPremio.open) {
-    modalPremio.close();
-    console.log("🏆 Prêmio resgatado — modal fechado automaticamente.");
-  }
+  // Adiciona ao array de resgatados
+  premiosJaResgatados.push(nivelAtual - 1);
 
-  // Manter o comportamento visual original: animar e fechar o modal de recompensas se necessário
-  if (modalRecomp) {
-    modalRecomp.classList.add("fadeOut");
-    setTimeout(() => {
-      if (modalRecomp.open) modalRecomp.close();
-      modalRecomp.classList.remove("fadeOut");
-    }, 300);
-  }
-
+  // Fecha o modal e marca como resgatado
+  modalPremio.close();
   premioResgatado = true;
 
-  // Reset flags depois de pausar
+  // Atualiza tudo
+  atualizarIcones();
+  atualizarCards();
+
+  // 🔴 E aqui vem o ponto principal:
+  // Força o botão do modal de resgate a ficar inativo mesmo após atualizar os ícones
+  abrirModalPremio.classList.remove("ativo");
+  // abrirModalPremio.classList.add("indisponivel");
+  abrirModalPremio.disabled = true;
+
+  // Libera novamente após um pequeno delay (proteção de duplo clique)
   setTimeout(() => {
-    premioDesbloqueado = false;
     premioResgatado = false;
   }, 500);
 }
+
 
 //Vinculo o botão de resgatar, se ele existir
 if (btnResgatar) {
@@ -462,7 +566,6 @@ configurarModal(modalRecomp, abrirModalRecomp, fecharModalRecompElements[0]);
 configurarModal(modalPremio, abrirModalPremio, fecharModalPremio);
 configurarModal(modalSolic, abrirModalSolic, fecharModalSolic);
 
-// ADICIONO: se houver mais de um elemento .fechar-recomp (existem dois spans no seu HTML), fechar todos
 if (fecharModalRecompElements && fecharModalRecompElements.length > 0) {
   Array.from(fecharModalRecompElements).forEach((el) => {
     el.addEventListener("click", () => {
@@ -474,7 +577,6 @@ if (fecharModalRecompElements && fecharModalRecompElements.length > 0) {
   });
 }
 
-// botão 'abrir-recomp' atualize o progresso antes de abrir (mantendo a UX).
 if (abrirModalRecomp) {
   abrirModalRecomp.addEventListener("click", () => {
     atualizarProgresso();
@@ -482,9 +584,6 @@ if (abrirModalRecomp) {
   });
 }
 
-// =============================
-//  Também garanto que o botão 'abrir-recomp' atualize o progresso antes de abrir (mantendo a experiência do usuário)
-// =============================
 if (fecharModalPremio) {
   fecharModalPremio.addEventListener("click", () => {
     if (modalPremio && modalPremio.open) {
@@ -494,7 +593,4 @@ if (fecharModalPremio) {
   });
 }
 
-// =============================
-//  Final - log para debugging
-// =============================
 console.log("✅ recompensa.js inicializado - listeners prontos.");

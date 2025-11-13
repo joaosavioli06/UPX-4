@@ -22,7 +22,7 @@
         <nav>
             <ul class="navegacao">
                 <li><a href="./index.html">Home</a></li>
-                <li><a href="#como-funciona" class="link-como-funciona">Como funciona</a></li>
+                <li><a href="./index.html" class="link-como-funciona">Como funciona</a></li>
                 <li><a href="./mapa.html">Mapa</a></li>
                 <li><a href="./recompensa.html">Recompensa</a></li>
                 <li><a href="./faq.html">FAQ</a></li>
@@ -30,7 +30,10 @@
         </nav>
 
         <div class="acoes">
-            <p id="user-info" style="display:none;"></p>
+            <div id="user-info" style="display:none;">
+                <img id="user-img" class="icone_perfil" src="" alt="Foto do usuário" style="display:none;">
+                <span class="user-nome"></span>
+            </div>
             <button class="botao_sair" style="display:none;">Sair</button>
 
             <a href="./login.html" class="botao_login">Login</a>
@@ -82,7 +85,6 @@
         </div>
     </main>
     <script src="./src/js/script.js"></script>
-    <script src="./src/js/mapa.js"></script>
     <script type="module" src="./src/js/auth.js"></script>
 </body>
 

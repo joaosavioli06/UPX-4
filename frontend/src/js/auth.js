@@ -6,9 +6,6 @@ import { auth, db, signOut } from "./config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
-// ===============================
-// Elementos da interface
-// ===============================
 const loginBtn = document.querySelector(".botao_login");
 const cadastroBtn = document.querySelector(".botao_cadastro");
 const userInfo = document.getElementById("user-info");
@@ -21,7 +18,6 @@ if (userInfo && logoutBtn) {
     const userImg = userInfo.querySelector(".icone_perfil");
 
     if (user) {
-      // 🔹 Buscar nome no Firestore se não houver displayName
       let nome = user.displayName;
       if (!nome) {
         try {
@@ -52,13 +48,10 @@ if (userInfo && logoutBtn) {
       if (loginBtn) loginBtn.style.display = "none";
       if (cadastroBtn) cadastroBtn.style.display = "none";
     } else {
-      // 🔹 Quando o usuário sai
       if (userNome) userNome.textContent = "";
       if (userImg) userImg.style.display = "none";
       userInfo.style.display = "none";
       logoutBtn.style.display = "none";
-      if (loginBtn) loginBtn.style.display = "inline-block";
-      if (cadastroBtn) cadastroBtn.style.display = "inline-block";
     }
   });
 
