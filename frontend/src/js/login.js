@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const senha = document.getElementById("senha").value.trim();
 
       if (!email || !senha) {
-        alert("Preencha todos os campos.");
+        showToast("Preencha todos os campos.", "info");
         return;
       }
 
@@ -36,11 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("userToken", token);
         localStorage.setItem("userId", user.uid);
 
-        alert("Login bem-sucedido!");
+        showToast("Login bem-sucedido!", "success");
         window.location.href = "index.html";
       } catch (error) {
         console.error("Erro no login:", error);
-        alert("Credenciais inválidas. Verifique seu email e senha.");
+        showToast("Credenciais inválidas. Verifique seu email e senha.", "error");
       }
     });
   }
@@ -72,11 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("userToken", token);
         localStorage.setItem("userId", user.uid);
 
-        alert("Login com Google bem-sucedido!");
+        showToast("Login com Google bem-sucedido!", "success");
         window.location.href = "index.html";
       } catch (error) {
         console.error("Erro ao logar com Google:", error);
-        alert("Erro ao logar com Google: " + error.message);
+        showToast("Erro ao logar com Google: " + error.message);
       }
     });
   }

@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const lng = localStorage.getItem("longitude");
 
       if (!tipo || !descricao || !lat || !lng) {
-        alert("Todos os campos e a localização devem ser preenchidos.");
+        showToast("Todos os campos e a localização devem ser preenchidos.", "error");
         return;
       }
 
       const user = auth.currentUser;
       if (!user) {
-        alert("Você precisa estar logado para registrar uma reclamação.");
+        showToast("Você precisa estar logado para registrar uma reclamação." ,"info");
         return;
       }
 
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
 
-        alert("Reclamação registrada com sucesso! Aguarde aprovação para ganhar pontos.");
+        showToast("Reclamação registrada com sucesso! Aguarde aprovação para ganhar pontos.", "success");
 
         // Limpeza dos campos e estado
         document.getElementById("modal_reclamacao").value = "";
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.close();
       } catch (erro) {
         console.error("Erro ao salvar denúncia:", erro);
-        alert("Erro ao salvar. Tente novamente.");
+        showToast("Erro ao salvar. Tente novamente.", "error");
       } finally {
         // Reativa o botão depois de concluir
         btnRegistrar.disabled = false;
