@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const cep = document.getElementById("cep")?.value.trim();
             const endereco = document.getElementById("endereco")?.value.trim();
             if (!cep && !endereco) {
-                alert("Por favor, digite um endereço ou CEP.");
+                showToast("Por favor, digite um endereço ou CEP.", "warning");
                 return;
             }
 
@@ -113,23 +113,23 @@ document.addEventListener("DOMContentLoaded", () => {
                         marcadorAtual = L.marker([lat, lon]).addTo(map);
                         marcadorAtual.bindPopup(`Endereço localizado:<br>${data[0].display_name}`).openPopup();
 
-                        // Guardar coordenadas de la búsqueda
+                        // Guardar coordenadas da búsqueda
                         localStorage.setItem("latitude", lat);
                         localStorage.setItem("longitude", lon);
-                        
+
                         const enderecoInput = document.getElementById("endereco");
                         if (cep && enderecoInput) {
-                            const endereco = data[0].address?.road || ""; // extrae solo la rua
+                            const endereco = data[0].address?.road || "";
                             enderecoInput.value = endereco;
                         }
-                        
+
                     } else {
-                        alert("Endereço não encontrado. Tente ser mais específico.");
+                        showToast("Endereço não encontrado. Tente ser mais específico.", "warning");
                     }
                 })
                 .catch(error => {
                     console.error("Erro ao buscar o endereço:", error);
-                    alert("Erro ao buscar o endereço.");
+                    showToast("Erro ao buscar o endereço.", "error");
                 });
         }
 
@@ -161,11 +161,33 @@ document.addEventListener("DOMContentLoaded", () => {
             const descricao = document.getElementById("ocorrido")?.value;
             const lat = localStorage.getItem("latitude");
             const lng = localStorage.getItem("longitude");
-
+            const cep = document.getElementById("cep")?.value.trim();
+            const endereco = document.getElementById("endereco")?.value.trim();
             // validação
-            if (!tipo) { alert("Por favor, selecione o tipo de reclamação."); return; }
-            if (!descricao) { alert("Por favor, descreva o ocorrido."); return; }
-            if (!lat || !lng) { alert("Por favor, clique em um ponto no mapa para selecionar a localização."); return; }
+            if (!tipo) {
+                showToast("Por favor, selecione o tipo de reclamação.", "warning");
+                return;
+            }
+
+            if (!descricao) {
+                showToast("Por favor, descreva o ocorrido.", "error");
+                return;
+            }
+
+            if (!endereco) {
+                showToast("Por favor, informe o endereço.", "warning");
+                return;
+            }
+
+            if (!cep || cep.length < 8) {
+                showToast("Por favor, insira um CEP válido.", "warning");
+                return;
+            }
+
+            if (!lat || !lng) {
+                showToast("Por favor, clique no mapa para selecionar a localização.", "warning");
+                return;
+            }
 
             // Copiar valores ao modal
             document.getElementById("modal_reclamacao").value = tipo;
