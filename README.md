@@ -17,12 +17,12 @@ Neste repositório você encontrará o projeto do 4º semestre da disciplina de 
 
 ### Sobre o Projeto
 
-O projeto **EcoTrek** é um aplicativo colaborativo e gamificado que une a conscientização ambiental com a melhoria da mobilidade urbana. Ele foi projetado para capacitar os cidadãos a se tornarem agentes de mudança em suas próprias comunidades, tanto reportando problemas de infraestrutura quanto sendo recompensados por escolhas de transporte sustentável.
+O projeto **EcoTrek** é um aplicativo colaborativo e gamificado que une a conscientização ambiental com a melhoria da mobilidade urbana. Ele foi projetado para capacitar os cidadãos a se tornarem agentes de mudança em suas próprias comunidades, reportando problemas de infraestrutura.
 
 O sistema é dividido em duas funcionalidades principais:
 
 1.  **Mapa Colaborativo:** Uma plataforma onde os usuários podem reportar e visualizar problemas de mobilidade urbana, como buracos nas vias, falta de acessibilidade, ou pontos de ônibus sem abrigo.
-2.  **Sistema de Gamificação:** Os usuários ganham pontos ao registrar seus deslocamentos feitos com modos de transporte sustentável, como caminhar, pedalar ou usar transporte público. Os pontos podem ser trocados por benefícios ou simplesmente para acompanhar o impacto ambiental.
+2.  **Sistema de Gamificação:** Os usuários ganham pontos ao registrar reportes de problemas urbanos na infraestrutura geral da cidade. Os pontos podem ser trocados por benefícios ou simplesmente para acompanhar o impacto ambiental.
 
 O **EcoTrek** está alinhado com importantes **Objetivos de Desenvolvimento Sustentável (ODS)** da ONU: **ODS 11** (Cidades e Comunidades Sustentáveis), **ODS 13** (Ação Contra a Mudança Global do Clima) e **ODS 3** (Saúde e Bem-Estar).
 
@@ -32,10 +32,10 @@ O **EcoTrek** está alinhado com importantes **Objetivos de Desenvolvimento Sust
 
 As seguintes tecnologias foram escolhidas para o desenvolvimento do projeto:
 
-* **Frontend:** HTML, CSS, JavaScript (com a biblioteca React)
+* **Frontend:** HTML, CSS, JavaScript
 * **Backend:** Node.js, Express
-* **Banco de Dados:** Firebase
-* **API de Mapas:** Google Maps API
+* **Banco de Dados:** Firebase (Firebase Datastore)
+* **API de Mapas:** Leaflet (Biblioteca JS)
 
 ---
 
