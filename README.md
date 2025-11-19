@@ -45,6 +45,7 @@ Tanto o Front quanto o Back-end estão hospedados no Firebase.
 Para acessar o website, acesse por um dos dois links abaixo:
 
 **1.** https://ecotrek-802a6.web.app
+
 **2.** https://ecotrek-802a6.firebaseapp.com
 
 ---
