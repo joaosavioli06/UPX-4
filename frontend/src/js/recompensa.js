@@ -38,10 +38,10 @@ const abrirModalSolic = document.getElementById("abrir-solic");
 const fecharModalSolic = document.getElementsByClassName("fechar-solic")[0];
 
 let denunciasAprovadas = 0;
-let nivelAtual = 0;
 let premioDesbloqueado = false;
 let premioResgatado = false;
-let premiosJaResgatados = [];
+let premiosJaResgatados = JSON.parse(localStorage.getItem("premiosJaResgatados")) || [];
+let nivelAtual = parseInt(localStorage.getItem("nivelAtual")) || 1;
 
 const imgIndisponivel = "./src/img/Premio-indisponivel.svg";
 const imgResgatado = "./src/img/Premio-resgatado.svg";
@@ -306,28 +306,42 @@ async function atualizarPontosUsuario(userId) {
 // }
 
 // Atualiza as estrelas acima da barra
-function atualizarIcones() { 
-  const totalPremios = 10; 
-  const premiosDesbloqueados = Math.min(nivelAtual, totalPremios); 
+function atualizarIcones() {
+  console.log("Chamou atualizarIcones - nivelAtual:", nivelAtual);
+  console.log("premiosJaResgatados:", premiosJaResgatados);
+  const totalPremios = 10;
+  const premiosDesbloqueados = Math.min(nivelAtual, totalPremios);
 
-  icones.forEach((icone, i) => { 
-    if (premiosJaResgatados.includes(i)) { 
-      // Se já foi resgatado anteriormente
-      icone.src = imgResgatado; 
-      icone.alt = "Prêmio resgatado com sucesso"; 
-    } else if (i === premiosDesbloqueados - 1) { 
-      // O prêmio atual, disponível para resgate
-      icone.src = imgIndisponivel; 
-      icone.alt = "Prêmio desbloqueado, pronto para resgate"; 
-    } else if (i < premiosDesbloqueados - 1) { 
-      // Prêmios anteriores já resgatados
-      icone.src = imgResgatado; 
-      icone.alt = "Prêmio resgatado com sucesso"; 
-    } else { 
-      // Ainda não desbloqueado
-      icone.src = imgSupresa; 
-      icone.alt = "Prêmio ainda não desbloqueado"; 
-    } 
+  icones.forEach((icone, i) => {
+
+    if (premiosJaResgatados.includes(i)) {
+      icone.src = imgResgatado;
+      icone.alt = "Prêmio resgatado com sucesso";
+      return;
+    }
+
+    if (premiosDesbloqueados === 0) {
+      if (i === 0) {
+        icone.src = imgIndisponivel;
+        icone.alt = "Primeiro prêmio ainda indisponível";
+      } else {
+        icone.src = imgSupresa;
+        icone.alt = "Prêmio ainda não desbloqueado";
+      }
+      return;
+    }
+
+    const indiceAtual = premiosJaResgatados.length;
+    if (i === indiceAtual) {
+      icone.src = imgIndisponivel;
+      icone.alt = "Prêmio desbloqueado, pronto para resgate";
+    } else if (i < premiosDesbloqueados - 1) {
+      icone.src = imgResgatado;
+      icone.alt = "Prêmio resgatado";
+    } else {
+      icone.src = imgSupresa;
+      icone.alt = "Prêmio ainda não desbloqueado";
+    }
   });
 }
 
@@ -342,7 +356,6 @@ function atualizarCards() {
     const spanNivel = card.querySelector(".nivel");
 
     if (i <= nivelAtual) {
-      // Prêmio disponível para resgate
       img.src = "./src/img/Desbloqueado.svg";
       img.alt = "Cadeado aberto";
       botao.textContent = "Prêmio disponível";
@@ -352,7 +365,6 @@ function atualizarCards() {
       card.classList.add("ativo");
       spanNivel.classList.add("ativo");
     } else {
-      // Ainda bloqueado
       img.src = "./src/img/Bloqueado.svg";
       img.alt = "Cadeado fechado";
       botao.textContent = "Prêmio indisponível";
@@ -365,7 +377,6 @@ function atualizarCards() {
   }
 }
 
-// Desbloqueia visualmente os cards no carrossel
 function desbloquearRecompensa(nivel) {
   const card = document.getElementById(`nivel${nivel}`);
   if (card) {
@@ -373,7 +384,6 @@ function desbloquearRecompensa(nivel) {
     const botao = card.querySelector("button");
     const spanNivel = card.querySelector(".nivel");
 
-    // Ícone colorido e card ativo
     img.src = "./src/img/Desbloqueado.svg";
     img.alt = "Cadeado aberto";
 
@@ -385,52 +395,13 @@ function desbloquearRecompensa(nivel) {
   }
 }
 
-// Abrir modal apenas se o botão estiver ativo
 abrirModalPremio.addEventListener("click", () => {
   if (!abrirModalPremio.classList.contains("indisponivel")) {
     atualizarConteudoPremio(nivelAtual);
     modalPremio.showModal();
   }
 });
-
-// Fechar modal
 fecharModalPremio.addEventListener("click", () => modalPremio.close());
-
-// Resgatar prêmio
-btnResgatar.addEventListener("click", () => {
-  if (!premioResgatado) {
-    const indice = nivelAtual - 1;
-
-    // Atualiza o ícone para "resgatado"
-    icones[indice].src = imgResgatado;
-    icones[indice].alt = "Prêmio resgatado com sucesso";
-
-    // Mantém o card atual como ativo (não volta a ficar preto e branco)
-    const cardAtual = document.getElementById(`nivel${nivelAtual}`);
-    if (cardAtual) {
-      cardAtual.classList.add("ativo");
-      const botao = cardAtual.querySelector("button");
-      botao.textContent = "Prêmio resgatado";
-      botao.disabled = true;
-      botao.classList.remove("ativo");
-      botao.classList.add("resgatado"); // opcional, caso tenha estilo próprio
-    }
-
-    // Atualiza o próximo card para desbloqueado
-    if (icones[indice + 1]) {
-      desbloquearRecompensa(nivelAtual + 1);
-    }
-
-    // Impede resgate duplo e fecha modal
-    premioResgatado = true;
-    modalPremio.close();
-
-    // Reseta flags após meio segundo
-    setTimeout(() => {
-      premioResgatado = false;
-    }, 500);
-  }
-});
 
 // =============================
 //  CARROSSEL 
@@ -503,6 +474,7 @@ function atualizarConteudoPremio(nivel) {
 // Resgatar prêmio: fecha o modal de prêmio e atualiza os ícones visuais
 // =============================
 function resgatarPremio() {
+  console.log("ANTES do resgate - nivelAtual:", nivelAtual);
   if (premioResgatado) return;
 
   const idx = nivelAtual - 1;
@@ -521,24 +493,21 @@ function resgatarPremio() {
     botao.classList.add("resgatado");
   }
 
-  // Adiciona ao array de resgatados
-  premiosJaResgatados.push(nivelAtual - 1);
+  premiosJaResgatados.push(idx);
+  nivelAtual++;
 
-  // Fecha o modal e marca como resgatado
+  localStorage.setItem("premiosJaResgatados", JSON.stringify(premiosJaResgatados));
+  localStorage.setItem("nivelAtual", nivelAtual);
+
   modalPremio.close();
   premioResgatado = true;
 
-  // Atualiza tudo
   atualizarIcones();
   atualizarCards();
 
-  // 🔴 E aqui vem o ponto principal:
-  // Força o botão do modal de resgate a ficar inativo mesmo após atualizar os ícones
   abrirModalPremio.classList.remove("ativo");
-  // abrirModalPremio.classList.add("indisponivel");
   abrirModalPremio.disabled = true;
 
-  // Libera novamente após um pequeno delay (proteção de duplo clique)
   setTimeout(() => {
     premioResgatado = false;
   }, 500);
