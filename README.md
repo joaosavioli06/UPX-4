@@ -67,6 +67,7 @@ O projeto foi apresentado para dois professores orientadores:
     </td>
   </tr>
 </table>
+
 ---
 
 ### Próximos Passos (Roadmap)
@@ -76,4 +77,5 @@ Este é um projeto experimental com potencial de crescimento. Os próximos passo
 * **Funcionalidades Gamificadas:** Implementar um sistema de desafios semanais e rankings.
 * **Integração com API de Dados Públicos:** Adicionar dados sobre qualidade do ar ou estatísticas de transporte público.
 * **Expansão do Mapa:** Habilitar o reporte de problemas em mais cidades.
-* **Versão Mobile:** Desenvolver um aplicativo nativo para Android e iOS.
+* **Versão Mobile:** Desenvolver um aplicativo nativo para Android e iOS. (5º semestre)
+* **Dashboard BI:** Adicionar uma área de dashboards no website, para entender quantos chamados já foram atendidos, aprovados e recusados por exemplo.
