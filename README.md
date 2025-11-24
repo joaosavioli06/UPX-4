@@ -53,17 +53,15 @@ Para acessar o website, acesse por um dos dois links abaixo:
 ### Apresentação Presencial
 
 O projeto foi devidamente apresentado no Centro Universitário Facens com todos os integrantes. A apresentação ocorreu no dia 19/11/2025 no período das 19:00 - 20:40.
-O projeto foi apresentado para dois professores orientadores
+O projeto foi apresentado para dois professores orientadores:
 
-* **Fabrício Tonetto Londero**
+* **Fabrício Tonetto Londero** & **Eliney Sabino**
 
-<img src="frontend/src/img/apresent_fabricio.jpeg" width="320"/>
+<img src="/frontend/src/img/apresent_fabricio.jpeg" width="320"/>
 
 
-* **Eliney Sabino**
 
 <img src="/frontend/src/img/apresent_eliney.jpeg" alt="Texto Alternativo" width="320"/>
-
 
 ---
 
