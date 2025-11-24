@@ -57,7 +57,8 @@ O projeto foi apresentado para dois professores orientadores
 
 * **Fabrício Tonetto Londero**
 
-<img src="/frontend/src/img/apresent_fabricio.jpeg" alt="Texto Alternativo" width="320"/>
+<img src="frontend/src/img/apresent_fabricio.jpeg" width="320"/>
+
 
 * **Eliney Sabino**
 
