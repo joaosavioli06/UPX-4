@@ -57,8 +57,7 @@ O projeto foi apresentado para dois professores orientadores:
 
 * **Fabrício Tonetto Londero** & **Eliney Sabino**
 
-<img src="/frontend/src/img/apresent_fabricio.jpeg" width="320"/> 
-
+![](/frontend/src/img/apresent_fabricio.jpeg)
 ---
 
 ### Próximos Passos (Roadmap)
