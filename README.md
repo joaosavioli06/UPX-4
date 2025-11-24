@@ -57,11 +57,16 @@ O projeto foi apresentado para dois professores orientadores:
 
 * **Fabrício Tonetto Londero** & **Eliney Sabino**
 
-<div align="center">
-  <img src="frontend/src/img/fabricio.jpeg" alt="Fabrício Tonetto Londero" width="320" style="padding-right: 10px;">
-  <img src="frontend/src/img/apresent_eliney.jpeg" alt="Eliney Sabino" width="320" style="padding-left: 10px;">
-</div>
-
+<table>
+  <tr>
+    <td align="center">
+      <img src="frontend/src/img/fabricio.jpeg" alt="Fabrício Tonetto Londero" width="320"/>
+    </td>
+    <td align="center">
+      <img src="frontend/src/img/apresent_eliney.jpeg" alt="Eliney Sabino" width="320"/>
+    </td>
+  </tr>
+</table>
 ---
 
 ### Próximos Passos (Roadmap)
