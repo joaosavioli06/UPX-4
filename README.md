@@ -50,6 +50,22 @@ Para acessar o website, acesse por um dos dois links abaixo:
 
 ---
 
+### Apresentação Presencial
+
+O projeto foi devidamente apresentado no Centro Universitário Facens com todos os integrantes. A apresentação ocorreu no dia 19/11/2025 no período das 19:00 - 20:40.
+O projeto foi apresentado para dois professores orientadores
+
+* **Fabrício Tonetto Londero**
+
+![](/frontend/src/img/apresent_fabricio.jpeg)
+
+* **Eliney Sabino**
+
+![](/frontend/src/img/apresent_eliney.jpeg)
+
+
+---
+
 ### Próximos Passos (Roadmap)
 
 Este é um projeto experimental com potencial de crescimento. Os próximos passos incluem:
