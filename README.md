@@ -39,7 +39,7 @@ As seguintes tecnologias foram escolhidas para o desenvolvimento do projeto:
 
 ---
 
-## 1. ⚙️ Pré-requisitos para Execução
+### 1. ⚙️ Pré-requisitos para Execução
 
 Para trabalhar com a aplicação, é necessário ter as seguintes ferramentas instaladas:
 
@@ -50,7 +50,7 @@ Para trabalhar com a aplicação, é necessário ter as seguintes ferramentas in
 
 ---
 
-## 2. 📁 Estrutura do Repositório
+### 2. 📁 Estrutura do Repositório
 
 O repositório está organizado para o deploy unificado (Frontend e Backend) no Firebase:
 
@@ -61,7 +61,7 @@ O repositório está organizado para o deploy unificado (Frontend e Backend) no 
 
 ---
 
-## 3. 🚀 Comandos de Deploy
+### 3. 🚀 Comandos de Deploy
 
 Para atualizar ou implantar a aplicação (executados na raiz do projeto, após o login com `firebase login`):
 
