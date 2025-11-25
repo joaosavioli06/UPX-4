@@ -39,6 +39,39 @@ As seguintes tecnologias foram escolhidas para o desenvolvimento do projeto:
 
 ---
 
+## 1. ⚙️ Pré-requisitos para Execução
+
+Para trabalhar com a aplicação, é necessário ter as seguintes ferramentas instaladas:
+
+* **Node.js:** Versão 18 ou superior.
+* **npm:** Gerenciador de pacotes do Node.
+* **Firebase CLI:** A interface de linha de comando do Firebase.
+    * Instalação: `npm install -g firebase-tools`
+
+---
+
+## 2. 📁 Estrutura do Repositório
+
+O repositório está organizado para o deploy unificado (Frontend e Backend) no Firebase:
+
+| Pasta/Arquivo | Conteúdo | Objetivo |
+| :--- | :--- | :--- |
+| **`frontend/`** | Contém todo o código da interface do usuário (HTML, CSS, JS). | É a pasta raiz do Firebase Hosting (`"public": "frontend"`). |
+| **`functions/`** | Código Node.js do backend, rodando no Firebase Cloud Functions. | Lógica de segurança e acesso ao banco de dados. |
+
+---
+
+## 3. 🚀 Comandos de Deploy
+
+Para atualizar ou implantar a aplicação (executados na raiz do projeto, após o login com `firebase login`):
+
+| Comando | Descrição |
+| :--- | :--- |
+| `firebase deploy --only hosting` | Implanta **apenas** as alterações do Frontend (pasta `frontend/`). |
+| `firebase deploy` | Implanta **todos** os serviços (Frontend e Backend). |
+
+---
+
 ### Acesso
 
 Tanto o Front quanto o Back-end estão hospedados no Firebase.
