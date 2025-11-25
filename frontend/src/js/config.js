@@ -2,14 +2,17 @@
 // EcoTrek - Configuração Firebase
 // ===============================
 
+import { secrets } from "./secrets.js";
+
+
 // 1. Configurações do seu Projeto Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyAcrMfjl3ft64AfB7JfS4OcgpML_aiRucs",
+  apiKey: secrets.FIREBASE_API_KEY,
   authDomain: "ecotrek-802a6.firebaseapp.com",
   projectId: "ecotrek-802a6",
   storageBucket: "ecotrek-802a6.appspot.com",
   messagingSenderId: "953729913204",
-  appId: "1:953729913204:web:xxxxxx" // coloque o appId real
+  appId: secrets.FIREBASE_APP_ID // coloque o appId real
 };
 
 // 2. Importa o SDK modular do Firebase
@@ -37,7 +40,7 @@ function getHeaders() {
 
 // 6. Exportar para outros módulos
 export { 
-  app, auth, db, API_URL_BASE, getHeaders,
+  app, auth, db, API_URL_BASE, getHeaders, firebaseConfig,
   GoogleAuthProvider, signInWithPopup, 
   signInWithEmailAndPassword, createUserWithEmailAndPassword,
   signOut, doc, getDoc, setDoc, serverTimestamp
