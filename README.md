@@ -1,5 +1,8 @@
 ![](/frontend/src/img/Logo-Ecotrek.png)
 
+> 🛑 **PROJETO DESATIVADO:** Este projeto não está mais em manutenção ou operacional.
+> Para detalhes históricos, consulte o diretório `FOTOS`.
+
 # Usina de Projetos Experimentais 4 - Grupo ODSCoders
 
 Neste repositório você encontrará o projeto do 4º semestre da disciplina de UPX - 4 (Usina de Projetos Experimentais 4) do grupo **ODSCoders** da turma A de Análise e Desenvolvimento de Sistemas EAD do Centro Universitário Facens.
